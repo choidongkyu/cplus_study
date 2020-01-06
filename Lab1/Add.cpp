@@ -2,7 +2,7 @@
 
 namespace lab1
 {
-	int Add (const int a, const int b)
+	int Add(int a, int b)
 	{
 		return a + b;
 	}
