@@ -1,9 +1,10 @@
 #include "Lab2.h"
 #include <string>
 #include <iomanip>
+
 namespace lab2
 {
-    std::string trash;
+    std::string Trash;
     void PrintIntegers(std::istream& in, std::ostream& out)
     {
         int num;
@@ -40,15 +41,15 @@ namespace lab2
     {
         float num;
         float max;
-        bool chk_first = true;
+        bool bChk_first = true;
         while (true)
         {
             in >> num;
 
-            if (chk_first)
+            if (bChk_first)
             {
                 max = num;
-                chk_first = false;
+                bChk_first = false;
             }
 
             if (num > max && !in.fail())
