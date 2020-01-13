@@ -12,7 +12,7 @@ namespace lab2
             << std::setw(9) << "hex" << std::endl;
         out << std::setfill('-') << std::setw(13) << ' '
             << std::setw(11) << ' '
-            << std::setw(9) << "" << std::endl;
+            << std::setw(8) << "" << std::endl;
 
         while (true)
         {
