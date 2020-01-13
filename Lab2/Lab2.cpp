@@ -47,7 +47,6 @@ namespace lab2
 
             if (chk_first)
             {
-                out << "chk_first =  " << num << std::endl;
                 max = num;
                 chk_first = false;
             }
@@ -55,7 +54,6 @@ namespace lab2
             if (num > max && !in.fail())
             {
                 max = num;
-                out << "max = " << num << std::endl;
             }
 
             if (in.fail())
@@ -65,13 +63,13 @@ namespace lab2
             }
             else
             {
-                out << std::setw(5) << std::setfill('.') << ""
+                out << std::setw(5) << std::setfill(' ') << ""
                     << std::setw(15) << std::showpos << std::fixed << std::setprecision(3) << std::internal << num << std::endl;
             }
 
             if (in.eof())
             {
-                out << std::setw(5) << std::setfill('.') << std::left << "max:"
+                out << std::setw(5) << std::setfill(' ') << std::left << "max:"
                     << std::setw(15) << std::showpos << std::fixed << std::setprecision(3) << std::internal << max << std::endl;
                 break;
             }
