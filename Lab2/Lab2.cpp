@@ -31,7 +31,8 @@ namespace lab2
 					<< std::setw(9) << std::uppercase << std::hex << number << std::endl;
 			}
 
-			if (in.eof()) {
+			if (in.eof())
+			{
 				break;
 			}
 		}
@@ -41,15 +42,15 @@ namespace lab2
 	{
 		float number;
 		float max;
-		bool bChk_first = true;
+		bool bChkFirst = true;
 		while (true)
 		{
 			in >> number;
 
-			if (bChk_first)
+			if (bChkFirst)
 			{
 				max = number;
-				bChk_first = false;
+				bChkFirst = false;
 			}
 
 			if (number > max && !in.fail())
