@@ -52,7 +52,7 @@ namespace lab2
 				bChk_first = false;
 			}
 
-			if(number > max && !in.fail())
+			if (number > max && !in.fail())
 			{
 				max = number;
 			}
