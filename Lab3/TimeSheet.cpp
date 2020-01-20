@@ -25,6 +25,17 @@ namespace lab3
 		memcpy(mTimeEntries, rhs.mTimeEntries, mIndex * sizeof(int));
 	}
 
+	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
+	{
+		mMaxEntries = rhs.mMaxEntries;
+		mIndex = rhs.mIndex;
+		mName = rhs.mName;
+		delete[] mTimeEntries;
+		mTimeEntries = new int[rhs.mIndex];
+		memcpy(mTimeEntries, rhs.mTimeEntries, mIndex * sizeof(int));
+		return *this;
+	}
+
 	void TimeSheet::AddTime(int timeInHours)
 	{
 		if (mIndex < mMaxEntries && timeInHours > 0 && timeInHours < 11)
