@@ -38,7 +38,7 @@ namespace lab3
 
 	void TimeSheet::AddTime(int timeInHours)
 	{
-		if (mIndex > mMaxEntries || timeInHours <= 0 || timeInHours > 10)
+		if (mIndex > mMaxEntries - 1 || timeInHours <= 0 || timeInHours > 10)
 		{
 			return;
 		}
