@@ -38,16 +38,17 @@ namespace lab3
 
 	void TimeSheet::AddTime(int timeInHours)
 	{
-		if (mIndex < mMaxEntries && timeInHours > 0 && timeInHours < 11)
+		if (mIndex > mMaxEntries || timeInHours <= 0 || timeInHours > 10)
 		{
-			*(mTimeEntries + mIndex) = timeInHours;
-			++mIndex;
+			return;
 		}
+		*(mTimeEntries + mIndex) = timeInHours;
+		++mIndex;
 	}
 
 	int TimeSheet::GetTimeEntry(unsigned int index) const
 	{
-		if (index > mIndex)
+		if (index >= mIndex)
 		{
 			return -1;
 		}
