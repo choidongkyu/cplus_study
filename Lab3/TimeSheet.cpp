@@ -21,19 +21,22 @@ namespace lab3
 		, mIndex(rhs.mIndex)
 		, mName(rhs.mName)
 	{
-		delete[] mTimeEntries;
-		mTimeEntries = new int[rhs.mIndex];
-		memcpy(mTimeEntries, rhs.mTimeEntries, mIndex * sizeof(int));
+		mTimeEntries = new int[rhs.mMaxEntries];
+		memcpy(mTimeEntries, rhs.mTimeEntries, mMaxEntries * sizeof(int));
 	}
 
 	TimeSheet& TimeSheet::operator=(const TimeSheet& rhs)
 	{
+		if (memcmp(this, &rhs, mMaxEntries * sizeof(int)) == 0)
+		{
+			return *this;
+		}
 		mMaxEntries = rhs.mMaxEntries;
 		mIndex = rhs.mIndex;
 		mName = rhs.mName;
-		delete[] mTimeEntries;
-		mTimeEntries = new int[rhs.mIndex];
-		memcpy(mTimeEntries, rhs.mTimeEntries, mIndex * sizeof(int));
+		mTimeEntries = new int[mMaxEntries];
+		memcpy(mTimeEntries, rhs.mTimeEntries, mMaxEntries * sizeof(int));
+
 		return *this;
 	}
 
