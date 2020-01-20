@@ -66,8 +66,8 @@ namespace lab3
 
 	float TimeSheet::GetAverageTime() const
 	{
-		int sum = GetTotalTime();
-		float ave = ((float)sum / mIndex);
+		float sum = GetTotalTime();
+		float ave = sum / mIndex;
 		return ave;
 	}
 
