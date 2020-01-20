@@ -21,6 +21,7 @@ namespace lab3
 		, mIndex(rhs.mIndex)
 		, mName(rhs.mName)
 	{
+		delete[] mTimeEntries;
 		mTimeEntries = new int[rhs.mIndex];
 		memcpy(mTimeEntries, rhs.mTimeEntries, mIndex * sizeof(int));
 	}
