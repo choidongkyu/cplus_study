@@ -80,6 +80,10 @@ namespace lab3
 	{
 		float ave = GetAverageTime();
 		float sum = 0.0f;
+		if (mIndex == 0)
+		{
+			return 0.0f;
+		}
 		for (unsigned int i = 0; i < mIndex; i++)
 		{
 			sum += (*(mTimeEntries + i) - ave) * (*(mTimeEntries + i) - ave);
