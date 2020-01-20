@@ -68,6 +68,10 @@ namespace lab3
 	float TimeSheet::GetAverageTime() const
 	{
 		int sum = GetTotalTime();
+		if (mIndex == 0)
+		{
+			return 0.0f;
+		}
 		float ave = static_cast <float>(sum) / mIndex;
 		return ave;
 	}
