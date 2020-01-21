@@ -34,7 +34,8 @@ namespace lab3
 		mMaxEntries = rhs.mMaxEntries;
 		mIndex = rhs.mIndex;
 		mName = rhs.mName;
-		if (mTimeEntries != nullptr) {
+		if (mTimeEntries != nullptr)
+		{
 			delete[] mTimeEntries;
 		}
 		mTimeEntries = new int[mMaxEntries];
