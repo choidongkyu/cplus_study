@@ -34,6 +34,9 @@ namespace lab3
 		mMaxEntries = rhs.mMaxEntries;
 		mIndex = rhs.mIndex;
 		mName = rhs.mName;
+		if (mTimeEntries != nullptr) {
+			delete[] mTimeEntries;
+		}
 		mTimeEntries = new int[mMaxEntries];
 		memcpy(mTimeEntries, rhs.mTimeEntries, mMaxEntries * sizeof(int));
 
