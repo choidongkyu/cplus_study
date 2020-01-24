@@ -34,6 +34,10 @@ namespace assignment1
 
 	void MyString::Append(const char* s)
 	{
+		if (*s == '\0')
+		{
+			return;
+		}
 		size_t size = Strlen(s);
 		char* tmp;
 		tmp = new char[mSize + size];
@@ -146,7 +150,7 @@ namespace assignment1
 
 	bool MyString::RemoveAt(unsigned int index)
 	{
-		if (index >= mSize)
+		if (index >= mSize || mSize == 1)
 		{
 			return false;
 		}
@@ -227,7 +231,7 @@ namespace assignment1
 			}
 			else
 			{
-				*(tmp + i) = '-';
+				*(tmp + i) = ' ';
 			}
 		}
 		tmp[mSize - 1] = '\0';
