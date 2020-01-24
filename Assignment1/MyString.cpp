@@ -101,7 +101,6 @@ namespace assignment1
 					{
 						break;
 					}
-
 				}
 				if (input == s)
 				{
@@ -340,19 +339,19 @@ namespace assignment1
 		return cnt;
 	}
 
-	void MyString::Memcpy(void* dst, const void* src, size_t count)
+	void MyString::Memcpy(char* dst, const char* src, size_t count)
 	{
 		for (size_t i = 0; i < count; i++)
 		{
-			*((char*)dst + i) = *((char*)src + i);
+			*(dst + i) = *(src + i);
 		}
 	}
 
-	bool MyString::Memcmp(const void* src1, const void* src2, size_t size) const
+	bool MyString::Memcmp(const char* src1, const char* src2, size_t size) const
 	{
 		for (size_t i = 0; i < size; i++)
 		{
-			if (*((char*)src1 + i) != *((char*)src2 + i))
+			if (*(src1 + i) != *(src2 + i))
 			{
 				return false;
 			}
