@@ -5,14 +5,8 @@ using namespace std;
 int main()
 {
     MyString s1("Hello");
+    MyString s2(" World");
 
-    s1.PadLeft(2); // s1: "Hello"
-    s1.PadLeft(8); // s1: "   Hello"
-
-    MyString s2("World");
-    s2.PadLeft(3, '-'); // s2: "World"
-    s2.PadLeft(7, '-'); // s2: "--World"
-    s1.Printf();
-    s2.Printf();
+    MyString s3 = s1 + s2; // s3는 "Hello World"가 되며, s1와 s2는 여전히 "Hello"와 " World"임
     return 0;
 }

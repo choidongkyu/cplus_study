@@ -25,9 +25,10 @@ namespace assignment1
 		MyString& operator=(const MyString& rhs);
 		void ToLower();
 		void ToUpper();
-		void Printf();
-		bool strcmp(const char* str1, const char* str2) const;
+		bool Strcmp(const char* str1, const char* str2) const;
 		size_t Strlen(const char* s) const;
+		void Memcpy(void* dst, const void* src, size_t count);
+		bool Memcmp(const void* src1, const void* src2, size_t size) const;
 
 	private:
 		char* mString;

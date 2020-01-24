@@ -1,6 +1,4 @@
 #include "MyString.h"
-#include <iostream>
-
 using namespace std;
 
 namespace assignment1
@@ -9,24 +7,19 @@ namespace assignment1
 		: mSize(Strlen(s) + 1)
 	{
 		mString = new char[mSize];
-		memcpy(mString, s, mSize);
+		Memcpy(mString, s, mSize);
 	}
 
 	MyString::MyString(const MyString& other)
 		: mSize(other.mSize)
 	{
 		mString = new char[mSize];
-		memcpy(mString, other.mString, mSize);
+		Memcpy(mString, other.mString, mSize);
 	}
 
 	MyString::~MyString()
 	{
 		delete[] mString;
-	}
-
-	void MyString::Printf()
-	{
-		cout << "Member String = " << mString << endl;
 	}
 
 	unsigned int MyString::GetLength() const
@@ -44,12 +37,12 @@ namespace assignment1
 		size_t size = Strlen(s);
 		char* tmp;
 		tmp = new char[mSize + size];
-		memcpy(tmp, mString, Strlen(mString));
-		memcpy(tmp + Strlen(mString), s, size + 1);
+		Memcpy(tmp, mString, Strlen(mString));
+		Memcpy(tmp + Strlen(mString), s, size + 1);
 		delete[] mString;
 		mSize += size;
 		mString = new char[mSize];
-		memcpy(mString, tmp, mSize);
+		Memcpy(mString, tmp, mSize);
 		delete[] tmp;
 	}
 
@@ -280,19 +273,19 @@ namespace assignment1
 
 	bool MyString::operator==(const MyString& rhs) const
 	{
-		return strcmp(mString, rhs.mString);
+		return Strcmp(mString, rhs.mString);
 	}
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
-		if (memcmp(this, &rhs, sizeof(MyString)) == 0)
+		if (Memcmp(this, &rhs, sizeof(MyString)))
 		{
 			return *this;
 		}
 		mSize = rhs.mSize;
 		delete[] mString;
 		mString = new char[mSize];
-		memcpy(mString, rhs.mString, mSize);
+		Memcpy(mString, rhs.mString, mSize);
 		return *this;
 	}
 
@@ -322,7 +315,7 @@ namespace assignment1
 		}
 	}
 
-	bool MyString::strcmp(const char* str1, const char* str2) const
+	bool MyString::Strcmp(const char* str1, const char* str2) const
 	{
 		while (*str1 != '\0' && *str1 == *str2)
 		{
@@ -345,5 +338,25 @@ namespace assignment1
 			++cnt;
 		}
 		return cnt;
+	}
+
+	void MyString::Memcpy(void* dst, const void* src, size_t count)
+	{
+		for (size_t i = 0; i < count; i++)
+		{
+			*((char*)dst + i) = *((char*)src + i);
+		}
+	}
+
+	bool MyString::Memcmp(const void* src1, const void* src2, size_t size) const
+	{
+		for (size_t i = 0; i < size; i++)
+		{
+			if (*((char*)src1 + i) != *((char*)src2 + i))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 }
