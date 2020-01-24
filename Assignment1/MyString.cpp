@@ -59,6 +59,10 @@ namespace assignment1
 		const char* input = s;
 		int i = 0;
 		size_t k;
+		if (*s == '\0')
+		{
+			return 0;
+		}
 		while (*copy != '\0')
 		{
 			if (*copy == *input)
@@ -87,6 +91,10 @@ namespace assignment1
 	{
 		const char* copy = mString + Strlen(mString) - 1;
 		int i = Strlen(mString) - 1;
+		if (*s == '\0')
+		{
+			return Strlen(mString);
+		}
 		while (copy != mString)
 		{
 			if (*copy == *(s + Strlen(s) - 1))
