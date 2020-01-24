@@ -27,8 +27,8 @@ namespace assignment1
 		void ToUpper();
 		bool Strcmp(const char* str1, const char* str2) const;
 		size_t Strlen(const char* s) const;
-		void Memcpy(void* dst, const void* src, size_t count);
-		bool Memcmp(const void* src1, const void* src2, size_t size) const;
+		void Memcpy(char* dst, const char* src, size_t count);
+		bool Memcmp(const char* src1, const char* src2, size_t size) const;
 
 	private:
 		char* mString;

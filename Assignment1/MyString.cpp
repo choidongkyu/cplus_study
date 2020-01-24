@@ -277,7 +277,7 @@ namespace assignment1
 
 	MyString& MyString::operator=(const MyString& rhs)
 	{
-		if (Memcmp(this, &rhs, sizeof(MyString)))
+		if (Memcmp(mString, rhs.mString, mSize))
 		{
 			return *this;
 		}
