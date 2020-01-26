@@ -170,7 +170,7 @@ namespace assignment1
 
 	bool MyString::RemoveAt(unsigned int index)
 	{
-		if (index >= mSize || mSize == 1)
+		if (index >= Strlen(mString) || Strlen(mString) == 0)
 		{
 			return false;
 		}
