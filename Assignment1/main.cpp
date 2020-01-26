@@ -6,88 +6,22 @@ using namespace assignment1;
 using namespace std;
 int main()
 {
-	int beforeAddress1;
-	int beforeAddress2;
+	MyString removeTest("Hello");
+	bool b1 = removeTest.RemoveAt(0); // s는 "ello", b1은 true
+	std::cout << "Hello의 첫글자 지우기 : " << removeTest.GetCString() << ", 성공여부 : " << b1 << std::endl;
+	assert(strcmp(removeTest.GetCString(), "ello") == 0);
+	assert(b1 == true);
 
-	MyString testString1("Happy Happy Days");
-	MyString testString2("Happy Days");
-	MyString testString3("Happy Days");
-	MyString testString4("");
+	bool b2 = removeTest.RemoveAt(3); // s는 "ell", b2은 true
+	std::cout << "ello의 네번째 글자 지우기 : " << removeTest.GetCString() << ", 성공여부 : " << b2 << std::endl;
+	assert(strcmp(removeTest.GetCString(), "ell") == 0);
+	assert(b2 == true);
 
-	//	Operator == 관련
-	beforeAddress1 = (int)testString2.GetCString();
-	beforeAddress2 = (int)testString3.GetCString();
-	if (testString2 == testString3);
-	assert(beforeAddress1 == (int)testString2.GetCString());
-	assert(beforeAddress2 == (int)testString3.GetCString());
-	cout << "D2_NoMallocInCompareSameLength 통과" << endl;
+	bool b3 = removeTest.RemoveAt(4); // s는 "ell", b3은 false
+	std::cout << "ell의 다섯번째 글자 지우기 : " << removeTest.GetCString() << ", 성공여부 : " << b3 << std::endl;
+	assert(strcmp(removeTest.GetCString(), "ell") == 0);
+	assert(b3 == false);
 
-	beforeAddress1 = (int)testString1.GetCString();
-	beforeAddress2 = (int)testString2.GetCString();
-	if (testString1 == testString2);
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	assert(beforeAddress2 == (int)testString2.GetCString());
-	cout << "D5_NoMallocInCompareDifferentLength 통과" << endl;
-
-	//	IndexOf, LastOfIndex 관련
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.IndexOf("Happy");
-	testString1.IndexOf("");
-	assert(beforeAddress1 == (int)testString1.GetCString());
-
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.LastIndexOf("Happy");
-	testString1.LastIndexOf("");
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	cout << "E5_NoMallocInIndexOf 통과" << endl;
-
-	//	ToUpper, ToLower 관련
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.ToUpper();
-	testString1.ToLower();
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	cout << "F3_NoMallocInUpperLower 통과" << endl;
-
-	//	Reverse 관련
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.Reverse();
-	testString1.Reverse();
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	beforeAddress1 = (int)testString4.GetCString();
-	testString4.Reverse();
-	assert(beforeAddress1 == (int)testString4.GetCString());
-	cout << "G4_NoMallocInReverse 통과" << endl;
-
-	//	Append 관련
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.Append("");
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	cout << "H3_NoMallocInAppendEmpty 통과" << endl;
-
-	//	 RemoveAt 관련
-	beforeAddress1 = (int)testString4.GetCString();
-	testString4.RemoveAt(0);
-	assert(beforeAddress1 == (int)testString4.GetCString());
-	cout << "J2_RemoveAtNoMallocOnEmpty 통과" << endl;
-
-	//	PadLeft, PadRight 관련
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.PadLeft(16);
-	testString1.PadLeft(16, '*');
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	cout << "K4_NoMallocInPadLeftShorter 통과" << endl;
-
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.PadRight(16);
-	testString1.PadRight(16, '*');
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	cout << "L4_NoMallocInPadRightShorter 통과" << endl;
-
-	//	InterLeave 관련
-	beforeAddress1 = (int)testString1.GetCString();
-	testString1.Interleave("");
-	assert(beforeAddress1 == (int)testString1.GetCString());
-	cout << "M3_NoMallocInInterleaveEmpty 통과" << endl;
 
     return 0;
 }

@@ -61,7 +61,6 @@ namespace assignment1
 	{
 		const char* copy = mString;
 		int i = 0;
-		size_t k;
 		if (s == nullptr)
 		{
 			return -1;
