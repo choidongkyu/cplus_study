@@ -180,7 +180,6 @@ namespace assignment1
 			*(mString + index) = *(mString + index + 1);
 			++index;
 		}
-
 		return true;
 	}
 
