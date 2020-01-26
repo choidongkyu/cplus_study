@@ -60,29 +60,38 @@ namespace assignment1
 	int MyString::IndexOf(const char* s)
 	{
 		const char* copy = mString;
-		const char* input = s;
 		int i = 0;
 		size_t k;
+		if (s == nullptr)
+		{
+			return -1;
+		}
 		if (*s == '\0')
 		{
 			return 0;
 		}
 		while (*copy != '\0')
 		{
-			if (*copy == *input)
+			if (*copy == *s)
 			{
-				for (k = 1; k < Strlen(input); k++)
+				const char* input = s;
+				while (*input != '\0')
 				{
-					++i;
+					++input;
 					++copy;
-					if (*copy != input[k])
+					++i;
+
+					if (*input == '\0')
 					{
+						return i - Strlen(s);
+					}
+
+					if (*copy != *input)
+					{
+						--i;
+						--copy;
 						break;
 					}
-				}
-				if (input[k] == '\0')
-				{
-					return i - (Strlen(s) - 1);
 				}
 			}
 			++copy;
@@ -95,6 +104,14 @@ namespace assignment1
 	{
 		const char* copy = mString + Strlen(mString) - 1;
 		int i = Strlen(mString) - 1;
+		if (s == nullptr)
+		{
+			return -1;
+		}
+		if (*mString == '\0')
+		{
+			return *s == '\0' ? 0 : -1;
+		}
 		if (*s == '\0')
 		{
 			return Strlen(mString);
@@ -128,6 +145,10 @@ namespace assignment1
 
 	void MyString::Interleave(const char* s)
 	{
+		if (*s == '\0')
+		{
+			return;
+		}
 		const char* copy = mString;
 		mSize = mSize + Strlen(s);
 		char* tmp = new char[mSize];
@@ -343,6 +364,10 @@ namespace assignment1
 	size_t MyString::Strlen(const char* s) const
 	{
 		size_t cnt = 0;
+		if (s == nullptr)
+		{
+			return cnt;
+		}
 		while (*s != '\0')
 		{
 			++s;
@@ -353,10 +378,16 @@ namespace assignment1
 
 	void MyString::Memcpy(char* dst, const char* src, size_t count)
 	{
+		if (src == nullptr)
+		{
+			*dst = '\0';
+			return;
+		}
 		for (size_t i = 0; i < count; i++)
 		{
 			*(dst + i) = *(src + i);
 		}
+		return;
 	}
 
 	bool MyString::Memcmp(const char* src1, const char* src2, size_t size) const
