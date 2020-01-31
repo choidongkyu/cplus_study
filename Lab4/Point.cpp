@@ -22,12 +22,12 @@ namespace lab4
 	Point Point::operator+(const Point& other) const
 	{
 
-		return Point(mX + other.GetX(), mY + other.GetY());
+		return Point(mX + other.mX, mY + other.mY);
 	}
 
 	Point Point::operator-(const Point& other) const
 	{
-		return Point(mX - other.GetX(), mY - other.GetY());
+		return Point(mX - other.mX, mY - other.mY);
 	}
 
 	float Point::Dot(const Point& other) const
@@ -63,6 +63,6 @@ namespace lab4
 	}
 	Point operator*(float operand, Point& other)
 	{
-		return Point(operand * other.GetX(), operand * other.GetY());
+		return Point(operand * other.mX, operand * other.mY);
 	}
 }
