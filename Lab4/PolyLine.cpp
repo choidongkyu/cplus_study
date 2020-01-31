@@ -5,7 +5,7 @@
 namespace lab4
 {
 	PolyLine::PolyLine()
-		:mSize(0)
+		: mSize(0)
 	{
 		mPoints = new Point[10];
 	}
@@ -64,7 +64,7 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		float minX = mPoints[0].GetX();
+		/*float minX = mPoints[0].GetX();
 		float minY = mPoints[0].GetY();
 		float maxX = mPoints[0].GetX();
 		float maxY = mPoints[0].GetY();
@@ -95,7 +95,7 @@ namespace lab4
 		}
 
 		outMin->SetXY(minX, minY);
-		outMax->SetXY(maxX, maxY);
+		outMax->SetXY(maxX, maxY);*/
 
 		return true;
 	}
