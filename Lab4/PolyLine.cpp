@@ -19,6 +19,10 @@ namespace lab4
 
 	PolyLine::~PolyLine()
 	{
+		for (size_t i = 0; i < mSize; i++)
+		{
+			delete* (mPoints + i);
+		}
 		delete[] mPoints;
 	}
 
@@ -35,15 +39,14 @@ namespace lab4
 
 	bool PolyLine::AddPoint(const Point* point)
 	{
-		if (mSize >= 10)
+		if (mSize >= 10 || point == nullptr)
 		{
 			return false;
 		}
-		if (point != nullptr)
-		{
-			memcpy(mPoints + mSize, &point, sizeof(point));
-			++mSize;
-		}
+
+		memcpy(mPoints + mSize, &point, sizeof(point));
+		++mSize;
+
 		return true;
 	}
 
