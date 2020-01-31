@@ -14,7 +14,7 @@ namespace lab4
 		: mSize(other.mSize)
 	{
 		mPoints = new Point * [10];
-		memcpy(mPoints, other.mPoints, sizeof(mPoints));
+		memcpy(&mPoints, &other.mPoints, sizeof(mPoints));
 	}
 
 	PolyLine::~PolyLine()
@@ -67,6 +67,10 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
+		if (mSize == 0) 
+		{
+			return false;
+		}
 		float maxX = mPoints[0]->GetX();
 		float minX = mPoints[0]->GetX();
 		float maxY = mPoints[0]->GetY();
