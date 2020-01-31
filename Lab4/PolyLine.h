@@ -18,6 +18,7 @@ namespace lab4
 		void Printf() const;
 
 		const Point* operator[](unsigned int i) const;
+		PolyLine& operator=(const PolyLine& other);
 
 	private:
 		size_t mSize;

@@ -67,7 +67,7 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		if (mSize == 0) 
+		if (mSize == 0)
 		{
 			return false;
 		}
@@ -122,5 +122,12 @@ namespace lab4
 			return NULL;
 		}
 		return *(mPoints + i);
+	}
+	PolyLine& PolyLine::operator=(const PolyLine& other)
+	{
+		mSize = other.mSize;
+		mPoints = new Point * [10];
+		memcpy(&mPoints, &other.mPoints, sizeof(mPoints));
+		return *this;
 	}
 }

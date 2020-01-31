@@ -12,7 +12,7 @@ int main()
 	pl.AddPoint(4,5);
 	pl.AddPoint(6, 6);
 	pl.AddPoint(1.2, 5.4);
-	PolyLine p3(pl);
+	PolyLine p3=pl;
 	p3.Printf();
 	
 	return 0;
