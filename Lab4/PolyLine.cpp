@@ -7,14 +7,14 @@ namespace lab4
 	PolyLine::PolyLine()
 		: mSize(0)
 	{
-		mPoints = new Point[10];
+		mPoints = new Point * [10];
 	}
 
 	PolyLine::PolyLine(const PolyLine& other)
 		: mSize(other.mSize)
 	{
-		mPoints = new Point[10];
-		memcpy(mPoints, other.mPoints, sizeof(Point) * 10);
+		mPoints = new Point * [10];
+		memcpy(mPoints, other.mPoints, sizeof(mPoints));
 	}
 
 	PolyLine::~PolyLine()
@@ -28,7 +28,7 @@ namespace lab4
 		{
 			return false;
 		}
-		mPoints[mSize] = Point(x, y);
+		*(mPoints + mSize) = new Point(x, y);
 		++mSize;
 		return true;
 	}
@@ -39,8 +39,11 @@ namespace lab4
 		{
 			return false;
 		}
-		mPoints[mSize] = *point;
-		++mSize;
+		if (point != nullptr)
+		{
+			memcpy(mPoints + mSize, &point, sizeof(point));
+			++mSize;
+		}
 		return true;
 	}
 
@@ -50,11 +53,8 @@ namespace lab4
 		{
 			return false;
 		}
-		if (i == mSize - 1) {
-			--mSize;
-			return true;
-		}
-		for (; i < mSize - 1; i++)
+		delete* (mPoints + i);
+		for (; i < mSize; i++)
 		{
 			*(mPoints + i) = *(mPoints + i + 1);
 		}
@@ -64,39 +64,39 @@ namespace lab4
 
 	bool PolyLine::TryGetMinBoundingRectangle(Point* outMin, Point* outMax) const
 	{
-		float minX = mPoints[0].GetX();
-		float minY = mPoints[0].GetY();
-		float maxX = mPoints[0].GetX();
-		float maxY = mPoints[0].GetY();
+		float maxX = mPoints[0]->GetX();
+		float minX = mPoints[0]->GetX();
+		float maxY = mPoints[0]->GetY();
+		float minY = mPoints[0]->GetY();
 		for (size_t i = 0; i < mSize; i++)
 		{
-			if (maxX < mPoints[i].GetX())
+			if (maxX < mPoints[i]->GetX())
 			{
-				maxX = mPoints[i].GetX();
+				maxX = mPoints[i]->GetX();
 			}
-			if (minX > mPoints[i].GetX())
+
+			if (minX > mPoints[i]->GetX())
 			{
-				minX = mPoints[i].GetX();
+				minX = mPoints[i]->GetX();
 			}
-			if (maxY < mPoints[i].GetY())
+
+			if (maxY < mPoints[i]->GetY())
 			{
-				maxY = mPoints[i].GetY();
+				maxY = mPoints[i]->GetY();
 			}
-			if (minY > mPoints[i].GetY())
+
+			if (minY > mPoints[i]->GetY())
 			{
-				minY = mPoints[i].GetY();
+				minY = mPoints[i]->GetY();
 			}
 		}
-
 		float area = (maxX - minX) * (maxY - minY);
-		if (area <= 0)
+		if (area < 0)
 		{
 			return false;
 		}
-
 		outMin->SetXY(minX, minY);
 		outMax->SetXY(maxX, maxY);
-
 		return true;
 	}
 
@@ -104,7 +104,7 @@ namespace lab4
 	{
 		for (size_t i = 0; i < mSize; i++)
 		{
-			mPoints[i].Printf();
+			mPoints[i]->Printf();
 		}
 	}
 
@@ -114,6 +114,6 @@ namespace lab4
 		{
 			return NULL;
 		}
-		return mPoints + i;
+		return *(mPoints + i);
 	}
 }

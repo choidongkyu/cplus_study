@@ -21,6 +21,6 @@ namespace lab4
 
 	private:
 		size_t mSize;
-		Point* mPoints;
+		Point** mPoints;
 	};
 }
