@@ -14,15 +14,18 @@ namespace lab4
 		: mSize(other.mSize)
 	{
 		mPoints = new Point * [10];
-		memcpy(&mPoints, &other.mPoints, sizeof(mPoints));
+		for (size_t i = 0; i < 10; i++)
+		{
+			mPoints[i] = other.mPoints[i];
+		}
 	}
 
 	PolyLine::~PolyLine()
 	{
-		for (size_t i = 0; i < mSize; i++)
+		/*for (size_t i = 0; i < mSize; i++)
 		{
 			delete* (mPoints + i);
-		}
+		}*/
 		delete[] mPoints;
 	}
 
@@ -125,9 +128,16 @@ namespace lab4
 	}
 	PolyLine& PolyLine::operator=(const PolyLine& other)
 	{
+		if (this == &other)
+		{
+			return *this;
+		}
 		mSize = other.mSize;
 		mPoints = new Point * [10];
-		memcpy(&mPoints, &other.mPoints, sizeof(mPoints));
+		for (size_t i = 0; i < 10; i++)
+		{
+			mPoints[i] = other.mPoints[i];
+		}
 		return *this;
 	}
 }
