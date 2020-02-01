@@ -33,6 +33,7 @@ namespace lab4
 	{
 		mX = other.mX;
 		mY = other.mY;
+		return *this;
 	}
 
 	Point Point::operator-(const Point& other) const

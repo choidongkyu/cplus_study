@@ -127,6 +127,11 @@ namespace lab4
 		{
 			return *this;
 		}
+		for (size_t i = 0; i < mSize; i++)
+		{
+			delete* (mPoints + i);
+		}
+		delete[] mPoints;
 		mSize = other.mSize;
 		mPoints = new Point * [10];
 		for (size_t i = 0; i < other.mSize; i++)
