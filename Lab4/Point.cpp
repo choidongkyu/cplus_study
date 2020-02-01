@@ -26,8 +26,13 @@ namespace lab4
 
 	Point Point::operator+(const Point& other) const
 	{
-
 		return Point(mX + other.mX, mY + other.mY);
+	}
+
+	Point& Point::operator=(const Point& other)
+	{
+		mX = other.mX;
+		mY = other.mY;
 	}
 
 	Point Point::operator-(const Point& other) const
