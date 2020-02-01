@@ -136,7 +136,7 @@ namespace lab4
 		mPoints = new Point * [10];
 		for (size_t i = 0; i < 10; i++)
 		{
-			mPoints[i] = other.mPoints[i];
+			mPoints[i] = new Point(*(other.mPoints[i]));
 		}
 		return *this;
 	}
