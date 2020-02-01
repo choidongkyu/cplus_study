@@ -15,7 +15,6 @@ namespace lab4
 		float Dot(const Point& other) const;
 		Point operator*(float operand) const;
 		friend Point operator*(float operand, Point& other);
-		void Printf() const;
 
 		float GetX() const;
 		float GetY() const;

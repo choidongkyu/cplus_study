@@ -110,13 +110,6 @@ namespace lab4
 		return true;
 	}
 
-	void PolyLine::Printf() const
-	{
-		for (size_t i = 0; i < mSize; i++)
-		{
-			mPoints[i]->Printf();
-		}
-	}
 
 	const Point* PolyLine::operator[](unsigned int i) const
 	{

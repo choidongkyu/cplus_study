@@ -1,5 +1,4 @@
 #include "Point.h"
-#include <iostream>
 
 namespace lab4
 {
@@ -46,10 +45,6 @@ namespace lab4
 		return Point(mX * operand, mY * operand);
 	}
 
-	void Point::Printf() const
-	{
-		std::cout << "x=" << mX << ", y=" << mY << std::endl;
-	}
 
 
 	float Point::GetX() const
