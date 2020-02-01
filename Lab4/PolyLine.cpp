@@ -22,10 +22,10 @@ namespace lab4
 
 	PolyLine::~PolyLine()
 	{
-		/*for (size_t i = 0; i < mSize; i++)
+		for (size_t i = 0; i < mSize; i++)
 		{
 			delete* (mPoints + i);
-		}*/
+		}
 		delete[] mPoints;
 	}
 
