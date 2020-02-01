@@ -14,9 +14,9 @@ namespace lab4
 		: mSize(other.mSize)
 	{
 		mPoints = new Point * [10];
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < other.mSize; i++)
 		{
-			mPoints[i] = other.mPoints[i];
+			mPoints[i] = new Point(*(other.mPoints[i]));
 		}
 	}
 

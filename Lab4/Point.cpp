@@ -15,6 +15,12 @@ namespace lab4
 	{
 	}
 
+	Point::Point(const Point& other)
+		: mX(other.mX)
+		, mY(other.mY)
+	{
+	}
+
 	Point::~Point()
 	{
 	}
