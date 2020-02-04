@@ -13,7 +13,8 @@ namespace lab5
 
 	unsigned int Lawn::GetGrassPrice(eGrassType grassType) const
 	{
-		return GetArea() * GetLawnPrice(grassType) / 100;
+		double price = GetArea() * GetLawnPrice(grassType) / 100.0;
+		return static_cast<unsigned int>(round(price));
 	}
 
 	unsigned int Lawn::GetLawnPrice(eGrassType grassType) const

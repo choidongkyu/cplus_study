@@ -11,7 +11,7 @@ namespace lab5
 	unsigned int EquilateralTriangleLawn::GetArea() const
 	{
 		double area = (sqrt(3) / 4) * pow(mWidth, 2);
-		return static_cast<unsigned int>(ceil(area));
+		return static_cast<unsigned int>(round(area));
 	}
 	unsigned int EquilateralTriangleLawn::GetMinimumFencesCount() const
 	{
