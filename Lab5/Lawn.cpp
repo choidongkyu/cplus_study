@@ -3,7 +3,7 @@
 namespace lab5
 {
 	Lawn::Lawn()
-		:mSodRollArea(0.3)
+		: mSodRollArea(0.3)
 	{
 	}
 
