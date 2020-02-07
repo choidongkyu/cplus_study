@@ -1,5 +1,6 @@
 #pragma once
-
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include "Person.h"
 #define MAX_PERSON_COUNT 100
 namespace assignment2
@@ -9,14 +10,15 @@ namespace assignment2
 	public:
 		Vehicle(unsigned int maxPassengersCount);
 		~Vehicle();
-
-		//virtual unsigned int GetMaxSpeed() const = 0;
+		virtual unsigned int GetMaxSpeed() const = 0;
 
 		bool AddPassenger(const Person* person);
 		bool RemovePassenger(unsigned int i);
 		const Person* GetPassenger(unsigned int i) const;
 		unsigned int GetPassengersCount() const;
 		unsigned int GetMaxPassengersCount() const;
+		unsigned int GetPassengerWeight() const;
+		const void Printfs() const;
 
 	private:
 		const Person* mPersons[MAX_PERSON_COUNT];

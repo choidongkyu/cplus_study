@@ -21,4 +21,13 @@ namespace assignment2
 	{
 		return mWeight;
 	}
+	const void Person::Printf() const
+	{
+		if (this == NULL)
+		{
+			std::cout << "NULL" << std::endl;
+			return;
+		}
+		std::cout <<"person name = "<< mName << std::endl;
+	}
 }
