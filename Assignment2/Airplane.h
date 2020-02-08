@@ -4,6 +4,7 @@
 #include "Vehicle.h"
 #include "IDrivable.h"
 #include "IFlyable.h"
+#include "Boat.h"
 
 namespace assignment2
 {

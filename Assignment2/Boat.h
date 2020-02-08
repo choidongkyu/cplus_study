@@ -3,6 +3,7 @@
 #include "Boatplane.h"
 #include "Vehicle.h"
 #include "ISailable.h"
+#include "Airplane.h"
 
 namespace assignment2
 {

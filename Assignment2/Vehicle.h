@@ -19,6 +19,7 @@ namespace assignment2
 		unsigned int GetMaxPassengersCount() const;
 		unsigned int GetPassengerWeight() const;
 		const void Printfs() const;
+		const void GetOff();
 
 	private:
 		const Person* mPersons[MAX_PERSON_COUNT];

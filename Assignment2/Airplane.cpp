@@ -1,6 +1,4 @@
 #include "Airplane.h"
-#include "Boat.h"
-#include "Boatplane.h"
 
 namespace assignment2
 {
@@ -31,7 +29,18 @@ namespace assignment2
 
 	Boatplane Airplane::operator+(Boat& boat)
 	{
-		Boatplane bp(0);
-		return bp;
+		Boatplane* bp = new Boatplane(this->GetMaxPassengersCount() + boat.GetMaxPassengersCount());
+		for (size_t i = 0; i < this->GetPassengersCount(); i++)
+		{
+			bp->AddPassenger(new Person(this->GetPassenger(i)));
+		}
+
+		for (size_t i = 0; i < boat.GetPassengersCount(); i++)
+		{
+			bp->AddPassenger(new Person(boat.GetPassenger(i)));
+		}
+		this->GetOff();
+		boat.GetOff();
+		return *bp;
 	}
 }

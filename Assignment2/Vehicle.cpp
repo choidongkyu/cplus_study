@@ -70,6 +70,16 @@ namespace assignment2
 		}
 	}
 
+	const void Vehicle::GetOff()
+	{
+		for (size_t i = 0; i < mPersonCount; i++)
+		{
+			mPersons[i] = nullptr;
+		}
+		mPersonCount = 0;
+		return ;
+	}
+
 	const Person* Vehicle::GetPassenger(unsigned int i) const
 	{
 		if (i >= mPersonCount)

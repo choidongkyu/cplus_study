@@ -12,6 +12,12 @@ namespace assignment2
 	{
 	}
 
+	Person::Person(const Person* person)
+		: mName(person->mName)
+		, mWeight(person->mWeight)
+	{
+	}
+
 	const std::string& Person::GetName() const
 	{
 		return mName;
