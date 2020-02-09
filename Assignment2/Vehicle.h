@@ -1,5 +1,5 @@
 #pragma once
-#define _USE_MATH_DEFINES
+#define M_E 2.71828182845904523536
 #include <cmath>
 #include <algorithm>
 #include "Person.h"
