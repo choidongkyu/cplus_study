@@ -35,12 +35,12 @@ namespace assignment2
 		Boatplane* bp = new Boatplane(this->GetMaxPassengersCount() + boat.GetMaxPassengersCount());
 		for (size_t i = 0; i < this->GetPassengersCount(); i++)
 		{
-			bp->AddPassenger(new Person(this->GetPassenger(i)));
+			bp->AddPassenger(this->GetPassenger(i));
 		}
 
 		for (size_t i = 0; i < boat.GetPassengersCount(); i++)
 		{
-			bp->AddPassenger(new Person(boat.GetPassenger(i)));
+			bp->AddPassenger(boat.GetPassenger(i));
 		}
 		this->GetOff();
 		boat.GetOff();

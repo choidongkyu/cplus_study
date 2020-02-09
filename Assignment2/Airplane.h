@@ -18,18 +18,14 @@ namespace assignment2
 		virtual unsigned int GetMaxSpeed() const;
 		Airplane(unsigned int maxPassengersCount);
 		~Airplane();
-
 		Boatplane operator+(Boat& boat);
-
 		// Vehicle을(를) 통해 상속됨
 		virtual void Travel() override;
-
+		// Vehicle을(를) 통해 상속됨
+		virtual unsigned int GetDistance() const override;
 	private:
 		unsigned int mMove;
 		unsigned int mRest;
 		unsigned int mDistance;
-
-		// Vehicle을(를) 통해 상속됨
-		virtual unsigned int GetDistance() const override;
 	};
 }

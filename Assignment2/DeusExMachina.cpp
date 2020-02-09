@@ -25,7 +25,6 @@ namespace assignment2
 		{
 			delete mVehicles[i];
 		}
-		delete mDeusExMachina;
 	}
 
 	void DeusExMachina::Travel() const

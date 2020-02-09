@@ -23,6 +23,15 @@ namespace assignment2
 		{
 			return false;
 		}
+
+		for (size_t i = 0; i < mPersonCount; i++)
+		{
+			if (memcmp(person, mPersons[i], sizeof(person)) == 0)
+			{
+				return false;
+			}
+		}
+
 		mPersons[mPersonCount] = person;
 		++mPersonCount;
 		return true;
