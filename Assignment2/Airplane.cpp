@@ -20,6 +20,9 @@ namespace assignment2
 	}
 	Airplane::Airplane(unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
+		, mMove(1)
+		, mRest(3)
+		, mDistance(0)
 	{
 	}
 
@@ -42,5 +45,26 @@ namespace assignment2
 		this->GetOff();
 		boat.GetOff();
 		return *bp;
+	}
+	void Airplane::Travel()
+	{
+		if (mMove == 0 && mRest == 0)
+		{
+			mMove = 1;
+			mRest = 3;
+		}
+		if (mMove > 0)
+		{
+			mDistance += GetMaxSpeed();
+			--mMove;
+		}
+		else if (mRest > 0)
+		{
+			--mRest;
+		}
+	}
+	unsigned int Airplane::GetDistance() const
+	{
+		return mDistance;
 	}
 }

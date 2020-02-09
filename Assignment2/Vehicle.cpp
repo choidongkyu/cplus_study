@@ -19,7 +19,7 @@ namespace assignment2
 
 	bool Vehicle::AddPassenger(const Person* person)
 	{
-		if (mPersonCount >= mMaxPassengersCount)
+		if (mPersonCount >= mMaxPassengersCount || person == nullptr)
 		{
 			return false;
 		}
@@ -34,6 +34,7 @@ namespace assignment2
 		{
 			return false;
 		}
+		delete mPersons[i];
 		for (; i < mPersonCount; i++)
 		{
 			mPersons[i] = mPersons[i + 1];
@@ -62,13 +63,6 @@ namespace assignment2
 		return result;
 	}
 
-	const void Vehicle::Printfs() const
-	{
-		for (size_t i = 0; i < mPersonCount; i++)
-		{
-			mPersons[i]->Printf();
-		}
-	}
 
 	const void Vehicle::GetOff()
 	{
@@ -77,7 +71,7 @@ namespace assignment2
 			mPersons[i] = nullptr;
 		}
 		mPersonCount = 0;
-		return ;
+		return;
 	}
 
 	const Person* Vehicle::GetPassenger(unsigned int i) const

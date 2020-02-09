@@ -4,6 +4,9 @@ namespace assignment2
 {
 	Boat::Boat(unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
+		, mMove(2)
+		, mRest(1)
+		, mDistance(0)
 	{
 	}
 
@@ -27,10 +30,12 @@ namespace assignment2
 		plane.GetOff();
 		return *bp;
 	}
+
 	unsigned int Boat::GetMaxSpeed() const
 	{
 		return GetSailSpeed();
 	}
+
 	unsigned int Boat::GetSailSpeed() const
 	{
 		int result = 800 - (10 * Vehicle::GetPassengerWeight());
@@ -39,5 +44,26 @@ namespace assignment2
 			return 20;
 		}
 		return result;
+	}
+	void Boat::Travel()
+	{
+		if (mMove == 0 && mRest == 0)
+		{
+			mMove = 2;
+			mRest = 1;
+		}
+		if (mMove > 0)
+		{
+			mDistance += GetMaxSpeed();
+			--mMove;
+		}
+		else if (mRest > 0)
+		{
+			--mRest;
+		}
+	}
+	unsigned int Boat::GetDistance() const
+	{
+		return mDistance;
 	}
 }

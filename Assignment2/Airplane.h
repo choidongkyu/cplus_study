@@ -20,5 +20,16 @@ namespace assignment2
 		~Airplane();
 
 		Boatplane operator+(Boat& boat);
+
+		// Vehicle을(를) 통해 상속됨
+		virtual void Travel() override;
+
+	private:
+		unsigned int mMove;
+		unsigned int mRest;
+		unsigned int mDistance;
+
+		// Vehicle을(를) 통해 상속됨
+		virtual unsigned int GetDistance() const override;
 	};
 }

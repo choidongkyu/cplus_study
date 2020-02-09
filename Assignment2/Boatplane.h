@@ -19,5 +19,14 @@ namespace assignment2
 
 		// IFlyable을(를) 통해 상속됨
 		virtual unsigned int GetFlySpeed() const override;
+
+		// Vehicle을(를) 통해 상속됨
+		virtual void Travel() override;
+		// Vehicle을(를) 통해 상속됨
+		virtual unsigned int GetDistance() const override;
+	private:
+		unsigned int mMove;
+		unsigned int mRest;
+		unsigned int mDistance;
 	};
 }

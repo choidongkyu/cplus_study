@@ -5,6 +5,10 @@ namespace assignment2
 	Sedan::Sedan()
 		: Vehicle(4)
 		, mbIsconnected(false)
+		, mTrailer(NULL)
+		, mMove(5)
+		, mRest(1)
+		, mDistance(0)
 	{
 	}
 
@@ -19,6 +23,7 @@ namespace assignment2
 		{
 			return false;
 		}
+		mRest = 2;
 		mTrailer = trailer;
 		mbIsconnected = true;
 		return true;
@@ -66,5 +71,33 @@ namespace assignment2
 			return 458;
 		}
 		return 0;
+	}
+	void Sedan::Travel()
+	{
+		if (mMove == 0 && mRest == 0)
+		{
+			mMove = 5;
+			if (mbIsconnected)
+			{
+				mRest = 2;
+			}
+			else
+			{
+				mRest = 1;
+			}
+		}
+		if (mMove > 0)
+		{
+			mDistance += GetMaxSpeed();
+			--mMove;
+		}
+		else if (mRest > 0)
+		{
+			--mRest;
+		}
+	}
+	unsigned int Sedan::GetDistance() const
+	{
+		return mDistance;
 	}
 }

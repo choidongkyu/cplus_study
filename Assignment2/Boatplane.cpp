@@ -4,6 +4,9 @@ namespace assignment2
 {
 	Boatplane::Boatplane(unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
+		, mMove(1)
+		, mRest(3)
+		, mDistance(0)
 	{
 	}
 
@@ -28,5 +31,27 @@ namespace assignment2
 		double weight = static_cast<double>(Vehicle::GetPassengerWeight());
 		double result = 150.0 * pow(M_E, (-weight + 500) / 300);
 		return static_cast<unsigned int>(result + 0.5);
+	}
+
+	void Boatplane::Travel()
+	{
+		if (mMove == 0 && mRest == 0)
+		{
+			mMove = 1;
+			mRest = 3;
+		}
+		if (mMove > 0)
+		{
+			mDistance += GetMaxSpeed();
+			--mMove;
+		}
+		else if (mRest > 0)
+		{
+			--mRest;
+		}
+	}
+	unsigned int Boatplane::GetDistance() const
+	{
+		return mDistance;
 	}
 }

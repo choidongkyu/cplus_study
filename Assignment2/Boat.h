@@ -22,5 +22,14 @@ namespace assignment2
 
 		// ISailable을(를) 통해 상속됨
 		virtual unsigned int GetSailSpeed() const;
+
+		// Vehicle을(를) 통해 상속됨
+		virtual void Travel() override;
+		// Vehicle을(를) 통해 상속됨
+		virtual unsigned int GetDistance() const override;
+	private:
+		unsigned int mMove;
+		unsigned int mRest;
+		unsigned int mDistance;		
 	};
 }
