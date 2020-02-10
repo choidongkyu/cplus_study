@@ -17,6 +17,41 @@ namespace assignment2
 		RemoveTrailer();
 	}
 
+	Sedan::Sedan(const Sedan& other)
+		: Vehicle(4)
+		, mbIsconnected(other.mbIsconnected)
+		, mMove(other.mMove)
+		, mRest(other.mRest)
+		, mDistance(other.mDistance)
+	{
+		if (other.mbIsconnected)
+		{
+			mTrailer = new Trailer(*other.mTrailer);
+		}
+		else
+		{
+			mTrailer = NULL;
+		}
+	}
+
+	Sedan& Sedan::operator=(const Sedan& other)
+	{
+		Vehicle::operator=(other);
+		mbIsconnected = other.mbIsconnected;
+		mMove = other.mMove;
+		mRest = other.mRest;
+		mDistance = other.mDistance;
+		if (other.mbIsconnected)
+		{
+			mTrailer = new Trailer(*other.mTrailer);
+		}
+		else
+		{
+			mTrailer = NULL;
+		}
+		return *this;
+	}
+
 	bool Sedan::AddTrailer(const Trailer* trailer)
 	{
 		if (mbIsconnected)
