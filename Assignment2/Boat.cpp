@@ -17,14 +17,14 @@ namespace assignment2
 	Boatplane Boat::operator+(Airplane& plane)
 	{
 		Boatplane* bp = new Boatplane(this->GetMaxPassengersCount() + plane.GetMaxPassengersCount());
-		for (size_t i = 0; i < this->GetPassengersCount(); i++)
-		{
-			bp->AddPassenger(this->GetPassenger(i));
-		}
-
 		for (size_t i = 0; i < plane.GetPassengersCount(); i++)
 		{
 			bp->AddPassenger(plane.GetPassenger(i));
+		}
+
+		for (size_t i = 0; i < this->GetPassengersCount(); i++)
+		{
+			bp->AddPassenger(this->GetPassenger(i));
 		}
 		this->GetOff();
 		plane.GetOff();
