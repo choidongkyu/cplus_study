@@ -34,7 +34,7 @@ namespace assignment2
 	unsigned int UBoat::GetDiveSpeed() const
 	{
 		double x = static_cast<double>(Vehicle::GetPassengerWeight());
-		double result = 500 * log10((x + 150) / 150) + 30;
+		double result = 500 * log((x + 150) / 150) + 30;
 		return static_cast<unsigned int>(result + 0.5);
 	}
 

@@ -15,7 +15,7 @@ namespace assignment2
 	}
 	unsigned int Boatplane::GetMaxSpeed() const
 	{
-		return std::max(GetSailSpeed(),GetFlySpeed());
+		return std::max(GetSailSpeed(), GetFlySpeed());
 	}
 	unsigned int Boatplane::GetSailSpeed() const
 	{
