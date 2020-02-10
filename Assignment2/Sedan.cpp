@@ -36,6 +36,11 @@ namespace assignment2
 
 	Sedan& Sedan::operator=(const Sedan& other)
 	{
+		if (this == &other)
+		{
+			return *this;
+		}
+		RemoveTrailer();
 		Vehicle::operator=(other);
 		mbIsconnected = other.mbIsconnected;
 		mMove = other.mMove;
