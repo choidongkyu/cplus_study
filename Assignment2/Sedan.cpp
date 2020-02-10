@@ -41,7 +41,7 @@ namespace assignment2
 	}
 	unsigned int Sedan::GetMaxSpeed() const
 	{
-		return 0;
+		return GetDriveSpeed();
 	}
 	unsigned int Sedan::GetDriveSpeed() const
 	{

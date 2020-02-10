@@ -16,7 +16,7 @@ namespace assignment2
 	}
 	unsigned int Airplane::GetMaxSpeed() const
 	{
-		return GetFlySpeed();
+		return std::max(GetFlySpeed(),GetDriveSpeed());
 	}
 	Airplane::Airplane(unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
