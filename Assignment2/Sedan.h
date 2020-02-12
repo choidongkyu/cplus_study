@@ -12,8 +12,8 @@ namespace assignment2
 	public:
 		Sedan();
 		~Sedan();
-		Sedan(const Sedan& other);
-		Sedan& operator=(const Sedan& other);
+		//Sedan(const Sedan& other);
+		//Sedan& operator=(const Sedan& other);
 		bool AddTrailer(const Trailer* trailer);
 		bool RemoveTrailer();
 

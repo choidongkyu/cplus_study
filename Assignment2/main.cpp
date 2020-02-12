@@ -15,27 +15,29 @@ using namespace assignment2;
 
 int main()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(186);
-	//_CrtSetBreakAlloc(190);
-	//_CrtSetBreakAlloc(164);
-	//_CrtSetBreakAlloc(163);
-	//_CrtSetBreakAlloc(162);
-	//_CrtSetBreakAlloc(161);
-	//_CrtSetBreakAlloc(159);
-	//_CrtSetBreakAlloc(158);
-	//_CrtSetBreakAlloc(157);
-	//_CrtSetBreakAlloc(156);
-	//_CrtSetBreakAlloc(155);
-	//_CrtSetBreakAlloc(154);
-	//_CrtSetBreakAlloc(152);
-	//_CrtSetBreakAlloc(151);
-	//_CrtSetBreakAlloc(150);
+	Person* p = new Person("Bob", 85);
+	Person* p2 = new Person("James", 75);
+	Person* p3 = new Person("Tina", 52);
 
-	DeusExMachina* deusExMachina1 = DeusExMachina::GetInstance();
-	Sedan* sedan2 = new Sedan();
-	sedan2->AddTrailer(new Trailer(60));
-	deusExMachina1->AddVehicle(sedan2);
-	delete deusExMachina1;
+	Person* p4 = new Person("Peter", 78);
+	Person* p5 = new Person("Jane", 48);
+	Person* p6 = new Person("Steve", 88);
+
+	Airplane a(5);
+	a.AddPassenger(p);
+	a.AddPassenger(p2);
+	a.AddPassenger(p3);
+
+	Boat b(5);
+	b.AddPassenger(p4);
+	b.AddPassenger(p5);
+	b.AddPassenger(p6);
+
+	Boatplane bp = a + b; // Boat + Airplane인 것에 유의
+	bp.GetPassengersCount(); // 6 반환
+	bp.GetMaxPassengersCount(); // 10 반환
+
+	a.GetPassengersCount(); // 0 반환
+	b.GetPassengersCount(); // 0 반환
 	return 0;
 }

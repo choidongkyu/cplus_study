@@ -17,7 +17,7 @@ namespace assignment2
 		RemoveTrailer();
 	}
 
-	Sedan::Sedan(const Sedan& other)
+	/*Sedan::Sedan(const Sedan& other)
 		: Vehicle(4)
 		, mbIsconnected(other.mbIsconnected)
 		, mMove(other.mMove)
@@ -32,9 +32,9 @@ namespace assignment2
 		{
 			mTrailer = NULL;
 		}
-	}
+	}*/
 
-	Sedan& Sedan::operator=(const Sedan& other)
+	/*Sedan& Sedan::operator=(const Sedan& other)
 	{
 		if (this == &other)
 		{
@@ -55,7 +55,7 @@ namespace assignment2
 			mTrailer = NULL;
 		}
 		return *this;
-	}
+	}*/
 
 	bool Sedan::AddTrailer(const Trailer* trailer)
 	{
