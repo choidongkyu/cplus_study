@@ -36,7 +36,7 @@ namespace lab6
 
 	int Max(const std::vector<int>& v)
 	{
-		int max = -INT32_MAX;
+		int max = INT32_MIN;
 		vector<int>::const_iterator iter = v.begin();
 		if (v.size() == 0)
 		{
@@ -55,6 +55,10 @@ namespace lab6
 
 	float Average(const std::vector<int>& v)
 	{
+		if (v.size() == 0)
+		{
+			return 0;
+		}
 		return static_cast<float>(Sum(v)) / v.size();
 	}
 
@@ -65,7 +69,7 @@ namespace lab6
 			return 0;
 		}
 		vector<int>::const_iterator iter = v.begin();
-		int max = -INT32_MAX;
+		int max = INT32_MIN;
 		size_t maxCount = 0;
 		while (iter != v.end())
 		{
@@ -95,10 +99,10 @@ namespace lab6
 		{
 			for (size_t j = 0; j < v.size() - i - 1; j++)
 			{
-				if (v[j] < v[j+1])
+				if (v[j] < v[j + 1])
 				{
 					tmp = v[j];
-					v[j] = v[j+1];
+					v[j] = v[j + 1];
 					v[j + 1] = tmp;
 				}
 			}
