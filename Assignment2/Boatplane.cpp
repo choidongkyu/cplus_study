@@ -10,8 +10,8 @@ namespace assignment2
 	{
 	}
 
-	Boatplane::Boatplane(Boatplane& bp)
-		: Vehicle(bp.GetMaxPassengersCount())
+	Boatplane::Boatplane(Boatplane& bp, unsigned int maxPassengersCount)
+		: Vehicle(maxPassengersCount)
 		, mMove(1)
 		, mRest(3)
 		, mDistance(0)

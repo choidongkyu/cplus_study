@@ -44,7 +44,7 @@ namespace assignment2
 		}
 		this->GetOff();
 		boat.GetOff();
-		return Boatplane(*bp);
+		return Boatplane(*bp, this->GetMaxPassengersCount() + boat.GetMaxPassengersCount());
 	}
 	void Airplane::Travel()
 	{

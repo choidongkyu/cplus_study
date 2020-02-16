@@ -28,7 +28,7 @@ namespace assignment2
 		}
 		this->GetOff();
 		plane.GetOff();
-		return Boatplane(*bp);
+		return Boatplane(*bp, this->GetMaxPassengersCount() + plane.GetMaxPassengersCount());
 	}
 
 	unsigned int Boat::GetMaxSpeed() const
