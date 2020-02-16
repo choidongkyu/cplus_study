@@ -2,8 +2,8 @@
 
 namespace assignment2
 {
-	Trailer::Trailer(const Trailer& other)
-		: mWeight(other.mWeight)
+	Trailer::Trailer(const Trailer* other)
+		: mWeight(other->mWeight)
 	{
 	}
 	Trailer::Trailer(unsigned int weight)

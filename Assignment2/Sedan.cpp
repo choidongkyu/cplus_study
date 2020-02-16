@@ -26,7 +26,7 @@ namespace assignment2
 	{
 		if (other.mbIsconnected)
 		{
-			mTrailer = new Trailer(*other.mTrailer);
+			mTrailer = new Trailer(other.mTrailer->GetWeight());
 		}
 		else
 		{
@@ -41,6 +41,7 @@ namespace assignment2
 			return *this;
 		}
 		RemoveTrailer();
+		//delete mTrailer;
 		Vehicle::operator=(other);
 		mbIsconnected = other.mbIsconnected;
 		mMove = other.mMove;
@@ -48,7 +49,7 @@ namespace assignment2
 		mDistance = other.mDistance;
 		if (other.mbIsconnected)
 		{
-			mTrailer = new Trailer(*other.mTrailer);
+			mTrailer = new Trailer(other.mTrailer->GetWeight());
 		}
 		else
 		{
@@ -76,6 +77,7 @@ namespace assignment2
 			return false;
 		}
 		delete mTrailer;
+		mTrailer = NULL;
 		mbIsconnected = false;
 		return true;
 	}
