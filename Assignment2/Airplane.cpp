@@ -44,7 +44,7 @@ namespace assignment2
 		}
 		this->GetOff();
 		boat.GetOff();
-		return *bp;
+		return Boatplane(*bp);
 	}
 	void Airplane::Travel()
 	{

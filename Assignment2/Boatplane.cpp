@@ -10,6 +10,18 @@ namespace assignment2
 	{
 	}
 
+	Boatplane::Boatplane(Boatplane& bp)
+		: Vehicle(bp.GetMaxPassengersCount())
+		, mMove(1)
+		, mRest(3)
+		, mDistance(0)
+	{
+		for (size_t i = 0; i < bp.GetPassengersCount(); i++)
+		{
+			this->AddPassenger(bp.GetPassenger(i));
+		}
+	}
+
 	Boatplane::~Boatplane()
 	{
 	}

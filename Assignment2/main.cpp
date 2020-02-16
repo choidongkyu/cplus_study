@@ -1,43 +1,83 @@
 #include <cassert>
-#include <crtdbg.h>
+#include <iostream>
+#include <iomanip>
+
 #include "Vehicle.h"
 #include "Airplane.h"
 #include "Boat.h"
 #include "Boatplane.h"
 #include "Motorcycle.h"
 #include "Sedan.h"
-#include "Trailer.h"
 #include "UBoat.h"
+#include "Trailer.h"
 #include "DeusExMachina.h"
 #include "Person.h"
 
+
+#define STR(name) #name
+
 using namespace assignment2;
+using namespace std;
 
 int main()
 {
-	Person* p = new Person("Bob", 85);
-	Person* p2 = new Person("James", 75);
-	Person* p3 = new Person("Tina", 52);
+	const char* MAX_SPEED_LABLE = "Max Speed: ";
+	const char* CUR_P_LABLE = "Current Person: ";
+	const unsigned int MAX_CAPACITY = 10;
 
-	Person* p4 = new Person("Peter", 78);
-	Person* p5 = new Person("Jane", 48);
-	Person* p6 = new Person("Steve", 88);
+	Vehicle* air = new Airplane(MAX_CAPACITY);
 
-	Airplane a(5);
-	a.AddPassenger(p);
-	a.AddPassenger(p2);
-	a.AddPassenger(p3);
+	Person* toAdd;
+	const unsigned int personWeight = 10;
 
-	Boat b(5);
-	b.AddPassenger(p4);
-	b.AddPassenger(p5);
-	b.AddPassenger(p6);
+	for (size_t i = 0; i < MAX_CAPACITY + 10; i++)
+	{
+		toAdd = new Person(STR(i), i);
+		if (air->AddPassenger(toAdd) == false)
+		{
+			delete toAdd;
+		}
 
-	Boatplane bp = a + b; // Boat + Airplane인 것에 유의
-	bp.GetPassengersCount(); // 6 반환
-	bp.GetMaxPassengersCount(); // 10 반환
+		cout << MAX_SPEED_LABLE << air->GetMaxSpeed() << endl
+			<< CUR_P_LABLE << air->GetPassengersCount() << endl;
+	}
 
-	a.GetPassengersCount(); // 0 반환
-	b.GetPassengersCount(); // 0 반환
+	while (air->RemovePassenger(0))
+	{
+		cout << CUR_P_LABLE << air->GetPassengersCount() << endl;;
+	}
+
+	Person* overlapTest = new Person("Overlap Test", 100);
+	air->AddPassenger(overlapTest);
+	air->AddPassenger(overlapTest);
+	assert(air->GetPassengersCount() == 1);
+
+	toAdd = NULL;
+	assert(air->AddPassenger(toAdd) == false);
+
+	delete air;
+
+	Airplane dockingTest1(10);
+	Boat dockingTest2(10);
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		dockingTest1.AddPassenger(new Person(STR(i), i));
+		dockingTest2.AddPassenger(new Person(STR(i), i));
+	}
+
+	const Person* comp1 = dockingTest1.GetPassenger(0);
+
+	Boatplane bp1 = dockingTest1 + dockingTest2;
+	Boatplane bp2 = dockingTest2 + dockingTest1;
+
+	const Person* comp2 = bp1.GetPassenger(0);
+
+	assert(comp1 == comp2);
+	assert(dockingTest1.GetPassengersCount() == 0);
+	assert(dockingTest2.GetPassengersCount() == 0);
+	assert(bp1.GetPassengersCount() == 10);
+	assert(bp2.GetPassengersCount() == 0);
+
 	return 0;
 }

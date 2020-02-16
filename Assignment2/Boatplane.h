@@ -9,6 +9,7 @@ namespace assignment2
 	{
 	public:
 		Boatplane(unsigned int maxPassengersCount);
+		Boatplane(Boatplane& bp);
 		~Boatplane();
 
 		// Vehicle을(를) 통해 상속됨
