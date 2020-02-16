@@ -35,12 +35,10 @@ int main()
 	assert(!sedanTest.AddTrailer(t2));
 	assert(sedanTest.RemoveTrailer());
 	assert(sedanTest.AddTrailer(t2));
+	sedanTest.AddPassenger(new Person("wer", 20));
 	//assert(sedanTest.RemoveTrailer());
 
-	Sedan copysedan;
-	copysedan.AddPassenger(new Person("wer", 10));
-	copysedan.AddTrailer(t3);
-	copysedan = sedanTest;
+	Sedan copysedan(sedanTest);
 
 	return 0;
 }
