@@ -10,7 +10,7 @@ namespace assignment2
 	{
 	}
 
-	Boatplane::Boatplane(const Person** person,unsigned int size, unsigned int maxPassengersCount)
+	Boatplane::Boatplane(const Person** person, unsigned int size, unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
 		, mMove(1)
 		, mRest(3)
@@ -18,7 +18,7 @@ namespace assignment2
 	{
 		for (size_t i = 0; i < size; i++)
 		{
-			this->AddPassenger(*(person+i));
+			this->AddPassenger(*(person + i));
 		}
 	}
 
