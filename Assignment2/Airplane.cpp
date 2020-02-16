@@ -32,19 +32,21 @@ namespace assignment2
 
 	Boatplane Airplane::operator+(Boat& boat)
 	{
-		Boatplane* bp = new Boatplane(this->GetMaxPassengersCount() + boat.GetMaxPassengersCount());
-		for (size_t i = 0; i < this->GetPassengersCount(); i++)
+		const Person* person[MAX_PERSON_COUNT];
+		size_t i = 0;
+		for (i; i < this->GetPassengersCount(); i++)
 		{
-			bp->AddPassenger(this->GetPassenger(i));
+			person[i] = this->GetPassenger(i);
 		}
 
-		for (size_t i = 0; i < boat.GetPassengersCount(); i++)
+		for (size_t j = 0; j < boat.GetPassengersCount(); j++)
 		{
-			bp->AddPassenger(boat.GetPassenger(i));
+			person[i] = boat.GetPassenger(j);
+			i++;
 		}
 		this->GetOff();
 		boat.GetOff();
-		return Boatplane(*bp, this->GetMaxPassengersCount() + boat.GetMaxPassengersCount());
+		return Boatplane(person, i, this->GetMaxPassengersCount() + boat.GetMaxPassengersCount());
 	}
 	void Airplane::Travel()
 	{

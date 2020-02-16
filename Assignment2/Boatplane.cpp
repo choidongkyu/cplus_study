@@ -10,15 +10,15 @@ namespace assignment2
 	{
 	}
 
-	Boatplane::Boatplane(Boatplane& bp, unsigned int maxPassengersCount)
+	Boatplane::Boatplane(const Person** person,unsigned int size, unsigned int maxPassengersCount)
 		: Vehicle(maxPassengersCount)
 		, mMove(1)
 		, mRest(3)
 		, mDistance(0)
 	{
-		for (size_t i = 0; i < bp.GetPassengersCount(); i++)
+		for (size_t i = 0; i < size; i++)
 		{
-			this->AddPassenger(bp.GetPassenger(i));
+			this->AddPassenger(*(person+i));
 		}
 	}
 
