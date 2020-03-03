@@ -17,8 +17,8 @@ namespace assignment2
 		RemoveTrailer();
 	}
 
-	/*Sedan::Sedan(const Sedan& other)
-		: Vehicle(4)
+	Sedan::Sedan(const Sedan& other)
+		: Vehicle(other)
 		, mbIsconnected(other.mbIsconnected)
 		, mMove(other.mMove)
 		, mRest(other.mRest)
@@ -26,15 +26,15 @@ namespace assignment2
 	{
 		if (other.mbIsconnected)
 		{
-			mTrailer = new Trailer(*other.mTrailer);
+			mTrailer = new Trailer(other.mTrailer->GetWeight());
 		}
 		else
 		{
 			mTrailer = NULL;
 		}
-	}*/
+	}
 
-	/*Sedan& Sedan::operator=(const Sedan& other)
+	Sedan& Sedan::operator=(const Sedan& other)
 	{
 		if (this == &other)
 		{
@@ -48,17 +48,21 @@ namespace assignment2
 		mDistance = other.mDistance;
 		if (other.mbIsconnected)
 		{
-			mTrailer = new Trailer(*other.mTrailer);
+			mTrailer = new Trailer(other.mTrailer->GetWeight());
 		}
 		else
 		{
 			mTrailer = NULL;
 		}
 		return *this;
-	}*/
+	}
 
 	bool Sedan::AddTrailer(const Trailer* trailer)
 	{
+		if (trailer == NULL)
+		{
+			return false;
+		}
 		if (mbIsconnected)
 		{
 			return false;
@@ -76,6 +80,7 @@ namespace assignment2
 			return false;
 		}
 		delete mTrailer;
+		mTrailer = NULL;
 		mbIsconnected = false;
 		return true;
 	}

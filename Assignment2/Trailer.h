@@ -5,7 +5,7 @@ namespace assignment2
 	class Trailer
 	{
 	public:
-		Trailer(const Trailer& other);
+		Trailer(const Trailer* other);
 		Trailer(unsigned int weight);
 		~Trailer();
 
