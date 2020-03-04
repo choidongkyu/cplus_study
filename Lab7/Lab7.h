@@ -73,11 +73,13 @@ namespace lab7
 		size_t i = 0;
 		for (auto iter = v1.begin(); iter != v1.end(); ++iter)
 		{
-			combined.push_back(*iter);
+			auto finditer = find(v1.begin(), iter, *iter);
+			if (finditer == iter)
+			{
+				combined.push_back(*iter);
+			}
 		}
 
-		auto deduplication = unique(combined.begin(), combined.end());
-		combined.erase(deduplication, combined.end());
 
 		for (auto iter = v2.begin(); iter != v2.end(); ++iter)
 		{
