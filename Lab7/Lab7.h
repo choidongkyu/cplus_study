@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include <iostream>
+#include <algorithm>
 
 namespace lab7
 {
@@ -75,6 +75,10 @@ namespace lab7
 		{
 			combined.push_back(*iter);
 		}
+
+		auto deduplication = unique(combined.begin(), combined.end());
+		combined.erase(deduplication, combined.end());
+
 		for (auto iter = v2.begin(); iter != v2.end(); ++iter)
 		{
 			auto finditer = find(v1.begin(), v1.end(), *iter);
