@@ -19,6 +19,7 @@ namespace assignment3
 		unsigned int GetStackCount();
 	private:
 		unsigned int mMaxStackSize;
+		unsigned int mCount;
 		T mSum;
 		SmartStack<T> mStack;
 		std::queue<SmartStack<T>> mQueue;
@@ -28,6 +29,7 @@ namespace assignment3
 	inline QueueStack<T>::QueueStack(unsigned int maxStackSize)
 		: mMaxStackSize(maxStackSize)
 		, mSum(0)
+		, mCount(0)
 	{
 	}
 
@@ -35,6 +37,7 @@ namespace assignment3
 	inline void QueueStack<T>::Enqueue(T data)
 	{
 		mSum += data;
+		++mCount;
 		if (mQueue.empty() || mQueue.back().GetCount() >= mMaxStackSize)
 		{
 			SmartStack<T> stack; 
@@ -55,6 +58,8 @@ namespace assignment3
 	inline T QueueStack<T>::Dequeue()
 	{
 		T value = mQueue.front().Pop();
+		mSum -= value;
+		--mCount;
 		if (mQueue.front().GetCount() == 0)
 		{
 			mQueue.pop();
@@ -65,36 +70,57 @@ namespace assignment3
 	template<typename T>
 	inline T QueueStack<T>::GetMax()
 	{
-		return T();
+		T max = std::numeric_limits<T>::lowest();
+		std::queue<SmartStack<T>> queue(mQueue);
+		while (!queue.empty())
+		{
+			if (max < queue.front().GetMax())
+			{
+				max = queue.front().GetMax();
+			}
+			queue.pop();
+		}
+		return max;
 	}
 
 	template<typename T>
 	inline T QueueStack<T>::GetMin()
 	{
-		return T();
+		T min = std::numeric_limits<T>::max();
+		std::queue<SmartStack<T>> queue(mQueue);
+		while (!queue.empty())
+		{
+			if (min > queue.front().GetMin())
+			{
+				min = queue.front().GetMin();
+			}
+			queue.pop();
+		}
+		return min;
 	}
 
 	template<typename T>
 	inline double QueueStack<T>::GetAverage()
 	{
-		return 0.0;
+		double ave = static_cast <double>(mSum) / mCount;
+		return round(ave * 1000) / 1000;
 	}
 
 	template<typename T>
 	inline T QueueStack<T>::GetSum()
 	{
-		return T();
+		return mSum;
 	}
 
 	template<typename T>
 	inline unsigned int QueueStack<T>::GetCount()
 	{
-		return 0;
+		return mCount;
 	}
 
 	template<typename T>
 	inline unsigned int QueueStack<T>::GetStackCount()
 	{
-		return 0;
+		return mQueue.size();
 	}
 }

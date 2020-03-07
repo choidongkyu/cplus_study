@@ -26,7 +26,7 @@ namespace assignment3
 		std::stack<T> mMaxStack;
 		std::stack<T> mMinStack;
 		T mSum;
-		T mSquaredSum;
+		double mSquaredSum;
 	};
 
 	template<typename T>
@@ -65,7 +65,7 @@ namespace assignment3
 		}
 		mStack.push(data);
 		mSum += data;
-		mSquaredSum += data * data;
+		mSquaredSum += static_cast<double>(data) * data;
 
 	}
 
@@ -74,7 +74,7 @@ namespace assignment3
 	{
 		T value = mStack.top();
 		mSum -= mStack.top();
-		mSquaredSum -= mStack.top() * mStack.top();
+		mSquaredSum -= static_cast<double>(mStack.top()) * mStack.top();
 		mStack.pop();
 		mMaxStack.pop();
 		mMinStack.pop();
@@ -93,7 +93,7 @@ namespace assignment3
 	{
 		if (mStack.empty())
 		{
-			return std::numeric_limits<T>::min();
+			return std::numeric_limits<T>::lowest();
 		}
 		return mMaxStack.top();
 	}
@@ -125,7 +125,7 @@ namespace assignment3
 	template<typename T>
 	inline double SmartStack<T>::GetVariance()
 	{
-		double ave = static_cast <double>(mSum) / mStack.size();
+		double ave = static_cast <double>(mSum) / mStack.size();//22.667 msquaredsum = 1910
 		double deviation = (static_cast<double>(mSquaredSum) / mStack.size()) - (ave * ave);
 		return round(deviation * 1000) / 1000;
 	}

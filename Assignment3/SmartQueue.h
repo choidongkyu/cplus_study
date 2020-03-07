@@ -25,7 +25,7 @@ namespace assignment3
 	private:
 		std::queue<T> mQueue;
 		T mSum;
-		T mSquaredSum;
+		double mSquaredSum;
 	};
 
 	template<typename T>
@@ -40,7 +40,7 @@ namespace assignment3
 	{
 		mQueue.push(data);
 		mSum += data;
-		mSquaredSum += data * data;
+		mSquaredSum += static_cast<double>(data) * data;
 	}
 
 	template<typename T>
@@ -54,7 +54,7 @@ namespace assignment3
 	{
 		T data = mQueue.front();
 		mSum -= data;
-		mSquaredSum -= data * data;
+		mSquaredSum -= static_cast<double>(data) * data;
 		mQueue.pop();
 		return data;
 	}
@@ -62,7 +62,7 @@ namespace assignment3
 	template<typename T>
 	inline T SmartQueue<T>::GetMax()
 	{
-		T max = std::numeric_limits<T>::min();
+		T max = std::numeric_limits<T>::lowest();
 		std::queue<T> queue(mQueue);
 		while (!queue.empty())
 		{
