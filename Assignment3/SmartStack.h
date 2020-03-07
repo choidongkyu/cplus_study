@@ -125,7 +125,7 @@ namespace assignment3
 	template<typename T>
 	inline double SmartStack<T>::GetVariance()
 	{
-		double ave = GetAverage();
+		double ave = static_cast <double>(mSum) / mStack.size();
 		double deviation = (static_cast<double>(mSquaredSum) / mStack.size()) - (ave * ave);
 		return round(deviation * 1000) / 1000;
 	}
