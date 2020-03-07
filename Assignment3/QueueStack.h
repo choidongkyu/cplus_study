@@ -40,7 +40,7 @@ namespace assignment3
 		++mCount;
 		if (mQueue.empty() || mQueue.back().GetCount() >= mMaxStackSize)
 		{
-			SmartStack<T> stack; 
+			SmartStack<T> stack;
 			stack.Push(data);
 			mQueue.push(stack);
 			return;

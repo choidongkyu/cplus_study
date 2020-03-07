@@ -65,7 +65,7 @@ namespace assignment3
 		}
 		mStack.push(data);
 		mSum += data;
-		mSquaredSum += static_cast<double>(data) * data;
+		mSquaredSum += static_cast<double>(data)* data;
 
 	}
 
@@ -74,7 +74,7 @@ namespace assignment3
 	{
 		T value = mStack.top();
 		mSum -= mStack.top();
-		mSquaredSum -= static_cast<double>(mStack.top()) * mStack.top();
+		mSquaredSum -= static_cast<double>(mStack.top())* mStack.top();
 		mStack.pop();
 		mMaxStack.pop();
 		mMinStack.pop();
@@ -112,7 +112,7 @@ namespace assignment3
 	inline double SmartStack<T>::GetAverage()
 	{
 		double ave = static_cast <double>(mSum) / mStack.size();
-		
+
 		return round(ave * 1000) / 1000;
 	}
 
@@ -136,7 +136,7 @@ namespace assignment3
 		double result = sqrt(GetVariance());
 		return round(result * 1000) / 1000;
 	}
-		
+
 
 	template<typename T>
 	inline unsigned int SmartStack<T>::GetCount()
