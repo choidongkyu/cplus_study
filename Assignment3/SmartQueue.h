@@ -40,7 +40,7 @@ namespace assignment3
 	{
 		mQueue.push(data);
 		mSum += data;
-		mSquaredSum += static_cast<double>(data)* data;
+		mSquaredSum += static_cast<double>(data) * data;
 	}
 
 	template<typename T>
@@ -54,7 +54,7 @@ namespace assignment3
 	{
 		T data = mQueue.front();
 		mSum -= data;
-		mSquaredSum -= static_cast<double>(data)* data;
+		mSquaredSum -= static_cast<double>(data) * data;
 		mQueue.pop();
 		return data;
 	}

@@ -50,7 +50,8 @@ namespace assignment3
 			{
 				mMaxStack.push(data);
 			}
-			else {
+			else
+			{
 				mMaxStack.push(mMaxStack.top());
 			}
 
@@ -65,7 +66,7 @@ namespace assignment3
 		}
 		mStack.push(data);
 		mSum += data;
-		mSquaredSum += static_cast<double>(data)* data;
+		mSquaredSum += static_cast<double>(data) * data;
 
 	}
 
@@ -74,7 +75,7 @@ namespace assignment3
 	{
 		T value = mStack.top();
 		mSum -= mStack.top();
-		mSquaredSum -= static_cast<double>(mStack.top())* mStack.top();
+		mSquaredSum -= static_cast<double>(mStack.top()) * mStack.top();
 		mStack.pop();
 		mMaxStack.pop();
 		mMinStack.pop();

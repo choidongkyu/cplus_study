@@ -21,7 +21,6 @@ namespace assignment3
 		unsigned int mMaxStackSize;
 		unsigned int mCount;
 		T mSum;
-		SmartStack<T> mStack;
 		std::queue<SmartStack<T>> mQueue;
 	};
 
