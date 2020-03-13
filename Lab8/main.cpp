@@ -1,17 +1,15 @@
 #include "FixedVector.h"
+#include "FixedBoolVector.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 using namespace lab8;
 int main()
 {
-	FixedVector<int, 4> v1;
-	v1.Add(1); // [ 1 ]
-	v1.Add(2); // [ 1, 2 ]
-	v1.Add(3); // [ 1, 2, 3 ]
-	v1.Add(4); // [ 1, 2, 3, 4 ]
-
-	v1.Remove(3); // [ 1, 2, 4 ]
-	v1.Remove(3); // false ¹ÝÈ¯
-
+	FixedVector<bool, 35> v;
+	for (size_t i = 0; i < 35; ++i)
+	{
+		v.Add(true);
+	}
 	return 0;
 }

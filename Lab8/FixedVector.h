@@ -11,6 +11,8 @@ namespace lab8
 		bool Add(const T data);
 		bool Remove(const T data);
 		int GetIndex(const T data) const;
+		size_t GetSize() const;
+		size_t GetCapacity() const;
 		void Printf() const;
 		T Get(const unsigned int index) const;
 		T operator[](const unsigned int index) const;
@@ -70,7 +72,15 @@ namespace lab8
 	template<typename T, size_t N>
 	inline int FixedVector<T, N>::GetIndex(const T data) const
 	{
-		
+		for (size_t i = 0; i < mSize; ++i)
+		{
+			if (*mArray[i] == data)
+			{
+				return static_cast<int>(i);
+			}
+		}
+		return -1;
+
 	}
 
 
@@ -82,17 +92,29 @@ namespace lab8
 			std::cout << *mArray[i] << std::endl;
 		}
 	}
-	
+
 	template<typename T, size_t N>
 	inline T FixedVector<T, N>::Get(unsigned int index) const
 	{
 		return *mArray[index];
 	}
-	
+
 	template<typename T, size_t N>
 	inline T FixedVector<T, N>::operator[](const unsigned int index) const
 	{
 		return *mArray[index];
+	}
+
+	template<typename T, size_t N>
+	inline size_t FixedVector<T, N>::GetSize() const
+	{
+		return mSize;
+	}
+
+	template<typename T, size_t N>
+	inline size_t FixedVector<T, N>::GetCapacity() const
+	{
+		return N;
 	}
 }
 
