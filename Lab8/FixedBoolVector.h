@@ -11,9 +11,9 @@ namespace lab8
 	public:
 		FixedVector();
 		~FixedVector() = default;
-		bool Add(const bool data);
-		bool Remove(const bool data);
-		int GetIndex(const bool data) const;
+		bool Add(const bool bData);
+		bool Remove(const bool bData);
+		int GetIndex(const bool bData) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 		bool Get(const unsigned int index) const;
@@ -32,7 +32,7 @@ namespace lab8
 	}
 
 	template<size_t N>
-	inline bool FixedVector<bool, N>::Add(const bool data)
+	inline bool FixedVector<bool, N>::Add(const bool bData)
 	{
 		int containerSize;
 		if (mSize >= N)
@@ -42,7 +42,7 @@ namespace lab8
 		++mSize;
 		containerSize = GetContainerSize(mSize);
 		mBoolContainer[containerSize] = (mBoolContainer[containerSize] << 1);
-		if (data)
+		if (bData)
 		{
 			mBoolContainer[containerSize] |= 0x01;
 		}
@@ -52,7 +52,7 @@ namespace lab8
 
 
 	template<size_t N>
-	inline bool FixedVector<bool, N>::Remove(const bool data)
+	inline bool FixedVector<bool, N>::Remove(const bool bData)
 	{
 		int containerSize;
 		int32_t prevBit = 0;
@@ -61,7 +61,7 @@ namespace lab8
 		for (size_t i = 0; i < mSize; ++i)
 		{
 			containerSize = GetContainerSize(i + 1);
-			if ((mBoolContainer[containerSize] >> (mSize - 1 - i) & 1) == data)
+			if ((mBoolContainer[containerSize] >> (mSize - 1 - i) & 1) == bData)
 			{
 				//std::cout << "return data" << std::endl;
 				for (size_t k = 0; k < (mSize - i - 1); ++k)
@@ -94,15 +94,20 @@ namespace lab8
 	}
 
 	template<size_t N>
-	inline int FixedVector<bool, N>::GetIndex(const bool data) const
+	inline int FixedVector<bool, N>::GetIndex(const bool bData) const
 	{
 		int containerSize;
 		for (size_t i = 0; i < mSize; ++i)
 		{
 			containerSize = GetContainerSize(i + 1);
-			if ((mBoolContainer[containerSize] >> (mSize - 1 - i) & 1) == data)
+			if ((mBoolContainer[containerSize] >> (mSize - 1 - i) & 1) == bData)
 			{
+				//std::cout << "find : " + i << std::endl;
 				return i;
+			}
+			else
+			{
+				//std::cout << "fail : " + i << std::endl;
 			}
 		}
 		return -1;
