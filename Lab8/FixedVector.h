@@ -10,7 +10,7 @@ namespace lab8
 		~FixedVector();
 		bool Add(const T& data);
 		bool Remove(const T& data);
-		int GetIndex(const T data) const;
+		int GetIndex(const T& data) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
 		void Printf() const;
@@ -66,7 +66,7 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	inline int FixedVector<T, N>::GetIndex(const T data) const
+	inline int FixedVector<T, N>::GetIndex(const T& data) const
 	{
 		for (size_t i = 0; i < mSize; ++i)
 		{
