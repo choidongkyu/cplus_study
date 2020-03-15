@@ -13,7 +13,6 @@ namespace lab8
 		int GetIndex(const T& data) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
-		void Printf() const;
 		T& Get(const unsigned int index) const;
 		T& operator[](unsigned int index);
 	private:
@@ -77,16 +76,6 @@ namespace lab8
 		}
 		return -1;
 
-	}
-
-
-	template<typename T, size_t N>
-	inline void FixedVector<T, N>::Printf() const
-	{
-		for (size_t i = 0; i < mSize; ++i)
-		{
-			std::cout << mArray[i] << std::endl;
-		}
 	}
 
 	template<typename T, size_t N>
