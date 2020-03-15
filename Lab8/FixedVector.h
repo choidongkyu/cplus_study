@@ -13,7 +13,7 @@ namespace lab8
 		int GetIndex(const T& data) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
-		T& Get(const unsigned int index) const;
+		T Get(const unsigned int index) const;
 		T& operator[](unsigned int index);
 	private:
 		size_t mSize;
@@ -79,7 +79,7 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	inline T& FixedVector<T, N>::Get(unsigned int index) const
+	inline T FixedVector<T, N>::Get(unsigned int index) const
 	{
 		return mArray[index];
 	}
