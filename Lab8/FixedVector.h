@@ -15,10 +15,10 @@ namespace lab8
 		size_t GetCapacity() const;
 		void Printf() const;
 		T Get(const unsigned int index) const;
-		T operator[](const unsigned int index) const;
+		T& operator[](unsigned int index);
 	private:
 		size_t mSize;
-		const T* mArray[N];
+		T* mArray[N];
 	};
 
 	template<typename T, size_t N>
@@ -100,7 +100,7 @@ namespace lab8
 	}
 
 	template<typename T, size_t N>
-	inline T FixedVector<T, N>::operator[](const unsigned int index) const
+	inline T& FixedVector<T, N>::operator[](unsigned int index)
 	{
 		return *mArray[index];
 	}
