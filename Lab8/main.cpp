@@ -6,6 +6,7 @@
 using namespace lab8;
 int main()
 {
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int i1 = 23;
 	int i2 = 25;
 	int i3 = 10;
