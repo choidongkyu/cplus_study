@@ -17,7 +17,7 @@ namespace lab8
 		T& operator[](unsigned int index);
 	private:
 		size_t mSize;
-		T* mArray;
+		T mArray[N];
 	};
 
 	template<typename T, size_t N>
@@ -25,7 +25,7 @@ namespace lab8
 		: mSize(0)
 		, mArray()
 	{
-		mArray = new T[N];
+		//mArray = new T[N];
 	}
 
 	template<typename T, size_t N>
@@ -43,7 +43,7 @@ namespace lab8
 	template<typename T, size_t N>
 	inline FixedVector<T, N>::~FixedVector()
 	{
-		delete[] mArray;
+		//delete[] mArray;
 	}
 
 	template<typename T, size_t N>
