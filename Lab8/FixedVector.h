@@ -8,8 +8,8 @@ namespace lab8
 	public:
 		FixedVector();
 		~FixedVector();
-		bool Add(const T data);
-		bool Remove(const T data);
+		bool Add(const T& data);
+		bool Remove(const T& data);
 		int GetIndex(const T data) const;
 		size_t GetSize() const;
 		size_t GetCapacity() const;
@@ -18,7 +18,7 @@ namespace lab8
 		T& operator[](unsigned int index);
 	private:
 		size_t mSize;
-		T* mArray[N];
+		T* mArray;
 	};
 
 	template<typename T, size_t N>
@@ -26,18 +26,17 @@ namespace lab8
 		: mSize(0)
 		, mArray()
 	{
+		mArray = new T[N];
 	}
 
 	template<typename T, size_t N>
-	inline bool FixedVector<T, N>::Add(const T data)
+	inline bool FixedVector<T, N>::Add(const T& data)
 	{
 		if (mSize >= N)
 		{
 			return false;
 		}
-		T* var = new T();
-		*var = data;
-		mArray[mSize] = var;
+		mArray[mSize] = data;
 		++mSize;
 		return true;
 	}
@@ -45,20 +44,16 @@ namespace lab8
 	template<typename T, size_t N>
 	inline FixedVector<T, N>::~FixedVector()
 	{
-		for (size_t i = 0; i < mSize; ++i)
-		{
-			delete mArray[i];
-		}
+		delete[] mArray;
 	}
 
 	template<typename T, size_t N>
-	inline bool FixedVector<T, N>::Remove(const T data)
+	inline bool FixedVector<T, N>::Remove(const T& data)
 	{
 		for (size_t i = 0; i < mSize; ++i)
 		{
-			if (*mArray[i] == data)
+			if (mArray[i] == data)
 			{
-				delete mArray[i];
 				for (size_t j = i; j < mSize; ++j)
 				{
 					mArray[j] = mArray[j + 1];
@@ -75,7 +70,7 @@ namespace lab8
 	{
 		for (size_t i = 0; i < mSize; ++i)
 		{
-			if (*mArray[i] == data)
+			if (mArray[i] == data)
 			{
 				return static_cast<int>(i);
 			}
@@ -90,20 +85,20 @@ namespace lab8
 	{
 		for (size_t i = 0; i < mSize; ++i)
 		{
-			std::cout << *mArray[i] << std::endl;
+			std::cout << mArray[i] << std::endl;
 		}
 	}
 
 	template<typename T, size_t N>
 	inline T& FixedVector<T, N>::Get(unsigned int index) const
 	{
-		return *mArray[index];
+		return mArray[index];
 	}
 
 	template<typename T, size_t N>
 	inline T& FixedVector<T, N>::operator[](unsigned int index)
 	{
-		return *mArray[index];
+		return mArray[index];
 	}
 
 	template<typename T, size_t N>
