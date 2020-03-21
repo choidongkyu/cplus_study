@@ -58,6 +58,7 @@ namespace lab9
 	{
 		if (mObjectPool.size() >= mMaxPoolSize)
 		{
+			delete object;
 			return;
 		}
 		mObjectPool.push(object);
