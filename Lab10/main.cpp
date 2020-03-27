@@ -86,7 +86,7 @@ int main()
 	node = list[7];
 	assert(*node->Data == 13);
 
-	/*bDeleted = list.Delete(2);
+	bDeleted = list.Delete(2);
 	assert(bDeleted);
 	bDeleted = list.Delete(4);
 	assert(bDeleted);
@@ -103,7 +103,7 @@ int main()
 	bDeleted = list.Delete(13);
 	assert(bDeleted);
 
-	assert(list[0] == nullptr);*/
+	assert(list[0] == nullptr);
 
 	return 0;
 }

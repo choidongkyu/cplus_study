@@ -69,6 +69,7 @@ namespace lab10
 		{
 			newNode = std::make_shared<Node<T>>(std::move(data));
 			newNode->Next = curr;
+			curr->Previous = newNode;
 			mHead = newNode;
 			mHead->Previous.lock() = nullptr;
 			++mSize;
@@ -100,6 +101,13 @@ namespace lab10
 			{
 				if (i == 0) // 첫 인덱스를 지울때
 				{
+					if (mSize == 1)
+					{
+						mHead = nullptr;
+						--mSize;
+						return true;
+					}
+
 					mHead = curr->Next;
 					mHead->Previous.lock() = nullptr;
 					--mSize;
