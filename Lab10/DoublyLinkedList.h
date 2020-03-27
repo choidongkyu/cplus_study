@@ -58,10 +58,20 @@ namespace lab10
 	void DoublyLinkedList<T>::Insert(std::unique_ptr<T> data, unsigned int index)
 	{
 		std::shared_ptr<Node<T>> curr = mHead;
-
+		std::shared_ptr<Node<T>> newNode;
 		if (index >= mSize)
 		{
 			Insert(std::move(data));
+			return;
+		}
+
+		if (index == 0)
+		{
+			newNode = std::make_shared<Node<T>>(std::move(data));
+			newNode->Next = curr;
+			mHead = newNode;
+			mHead->Previous.lock() = nullptr;
+			++mSize;
 			return;
 		}
 
@@ -70,11 +80,12 @@ namespace lab10
 			curr = curr->Next;
 		}
 
-		std::shared_ptr<Node<T>> newNode = std::make_shared<Node<T>>(std::move(data), curr->Previous.lock());
+		newNode = std::make_shared<Node<T>>(std::move(data), curr->Previous.lock());
 		curr->Previous.lock()->Next = newNode;
 		newNode->Next = curr;
 		curr->Previous.lock() = newNode;
 		++mSize;
+		return;
 	}
 
 	template<typename T>
@@ -89,10 +100,10 @@ namespace lab10
 			{
 				if (i == 0) // 첫 인덱스를 지울때
 				{
-					 mHead = curr->Next;
-					 mHead->Previous.lock() = nullptr;
-					 --mSize;
-					 return true;
+					mHead = curr->Next;
+					mHead->Previous.lock() = nullptr;
+					--mSize;
+					return true;
 				}
 
 				if (i == mSize - 1) // 끝 인덱스를 지울때
