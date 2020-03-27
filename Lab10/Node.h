@@ -19,7 +19,7 @@ namespace lab10
 	Node<T>::Node(std::unique_ptr<T> data)
 		: Data(std::move(data))
 	{
-		//std::cout << "node create : " << *Data << std::endl;
+		std::cout << "node create : " << *Data << std::endl;
 	}
 
 	template<typename T>
@@ -27,12 +27,12 @@ namespace lab10
 		: Data(std::move(data))
 	{
 		Previous = prev;
-		//std::cout << "node create : " << *Data << std::endl;
+		std::cout << "node create : " << *Data << std::endl;
 	}
 
 	template<typename T>
 	inline Node<T>::~Node()
 	{
-		//std::cout << "node delete : " << *Data << std::endl;
+		std::cout << "node delete : " << *Data << std::endl;
 	}
 }

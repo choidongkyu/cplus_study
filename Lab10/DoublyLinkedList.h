@@ -83,7 +83,7 @@ namespace lab10
 		newNode = std::make_shared<Node<T>>(std::move(data), curr->Previous.lock());
 		curr->Previous.lock()->Next = newNode;
 		newNode->Next = curr;
-		curr->Previous.lock() = newNode;
+		curr->Previous = newNode;
 		++mSize;
 		return;
 	}
@@ -116,7 +116,7 @@ namespace lab10
 
 				prev = curr->Previous;
 				next = curr->Next;
-				prev.lock()->Next = curr->Next;
+				prev.lock()->Next = next;
 				next->Previous = prev;
 				curr = nullptr;
 				--mSize;
