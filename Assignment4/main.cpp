@@ -1,27 +1,59 @@
+#include <cassert>
 #include "TreeNode.h"
 #include "BinarySearchTree.h"
-#include <assert.h>
+
 using namespace assignment4;
+
 int main()
 {
 	BinarySearchTree<int> tree;
-	tree.Insert(std::make_unique<int>(50));
-	tree.Insert(std::make_unique<int>(25));
-	tree.Insert(std::make_unique<int>(75));
-	tree.Insert(std::make_unique<int>(70));
-	tree.Insert(std::make_unique<int>(85));
+
+	tree.Insert(std::make_unique<int>(10));
 	tree.Insert(std::make_unique<int>(15));
-	tree.Insert(std::make_unique<int>(30));
-	tree.Insert(std::make_unique<int>(2));
-	tree.Insert(std::make_unique<int>(18));
-	tree.Insert(std::make_unique<int>(26));
-	tree.Insert(std::make_unique<int>(32));
-	//tree.Delete(85);
-	//tree.Delete(70);
-	tree.Delete(15);
-	//tree.Search(32);
-	tree.Search(18);
+	tree.Insert(std::make_unique<int>(5));
+	tree.Insert(std::make_unique<int>(4));
+	tree.Insert(std::make_unique<int>(19));
+	tree.Insert(std::make_unique<int>(20));
+	tree.Insert(std::make_unique<int>(17));
+	tree.Insert(std::make_unique<int>(12));
+
+	/*std::vector<int> v = tree.TraverseInOrder(tree.GetRootNode().lock());
+
+	assert(v.size() == 8);
+	assert(v[0] == 4);
+	assert(v[1] == 5);
+	assert(v[2] == 10);
+	assert(v[3] == 12);
+	assert(v[4] == 15);
+	assert(v[5] == 17);
+	assert(v[6] == 19);
+	assert(v[7] == 20);*/
+
+	bool bSearched = tree.Search(15);
+	assert(bSearched);
+
+	bool bDeleted = tree.Delete(6);
+	assert(!bDeleted);
+
+	bDeleted = tree.Delete(100);
+	assert(!bDeleted);
+
+	bDeleted = tree.Delete(15);
+	assert(bDeleted);
+
+	std::vector<int> v = tree.TraverseInOrder(tree.GetRootNode().lock());
+
+	assert(v.size() == 7);
+	assert(v[0] == 4);
+	assert(v[1] == 5);
+	assert(v[2] == 10);
+	assert(v[3] == 12);
+	assert(v[4] == 17);
+	assert(v[5] == 19);
+	assert(v[6] == 20);
+
+	bSearched = tree.Search(15);
+	assert(!bSearched);
 
 	return 0;
-
 }

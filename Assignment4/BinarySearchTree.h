@@ -18,6 +18,7 @@ namespace assignment4
 		const std::weak_ptr<TreeNode<T>> GetRootNode() const;
 
 		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
+		static std::vector<T> mVector;
 
 	private:
 		std::shared_ptr<TreeNode<T>> FindSubTree(std::shared_ptr<TreeNode<T>>& node);
@@ -27,6 +28,7 @@ namespace assignment4
 		std::shared_ptr<TreeNode<T>> mRootNode;
 		std::shared_ptr<TreeNode<T>> mDeleteNode;
 		std::shared_ptr<TreeNode<T>> mEmptyNode;
+		
 		size_t mSize;
 	};
 
@@ -62,9 +64,10 @@ namespace assignment4
 	template<typename T>
 	const std::weak_ptr<TreeNode<T>> BinarySearchTree<T>::GetRootNode() const
 	{
-		std::shared_ptr<TreeNode<T>> n;
-		return n;
+		return mRootNode;
 	}
+
+
 
 	template<typename T>
 	bool BinarySearchTree<T>::Search(const T& data)
@@ -104,6 +107,7 @@ namespace assignment4
 		}
 
 		std::cout << "FindSubTree = " << *tmpNode->Data << std::endl;
+
 		if (deleteNode == tmpNode)
 		{
 			if (deleteNode->Parent.lock() != nullptr)
@@ -138,6 +142,15 @@ namespace assignment4
 		}
 		else 
 		{
+			if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
+			{
+				tmpNode->Parent.lock()->Left = nullptr;
+			}
+			else
+			{
+				tmpNode->Parent.lock()->Right = nullptr;
+			}
+
 			if (deleteNode->Left != nullptr)
 			{
 				if (deleteNode->Left != tmpNode)
@@ -180,7 +193,13 @@ namespace assignment4
 	template<typename T>
 	std::vector<T> BinarySearchTree<T>::TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode)
 	{
-		std::vector<T> v;
+		static std::vector<T> v;
+		if (startNode != nullptr)
+		{
+			TraverseInOrder(startNode->Left);
+			v.push_back(*startNode->Data);
+			TraverseInOrder(startNode->Right);
+		}
 		return v;
 	}
 
