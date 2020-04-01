@@ -17,7 +17,7 @@ int main()
 	tree.Insert(std::make_unique<int>(17));
 	tree.Insert(std::make_unique<int>(12));
 
-	/*std::vector<int> v = tree.TraverseInOrder(tree.GetRootNode().lock());
+	std::vector<int> v = tree.TraverseInOrder(tree.GetRootNode().lock());
 
 	assert(v.size() == 8);
 	assert(v[0] == 4);
@@ -27,7 +27,7 @@ int main()
 	assert(v[4] == 15);
 	assert(v[5] == 17);
 	assert(v[6] == 19);
-	assert(v[7] == 20);*/
+	assert(v[7] == 20);
 
 	bool bSearched = tree.Search(15);
 	assert(bSearched);
@@ -41,7 +41,7 @@ int main()
 	bDeleted = tree.Delete(15);
 	assert(bDeleted);
 
-	std::vector<int> v = tree.TraverseInOrder(tree.GetRootNode().lock());
+	v = tree.TraverseInOrder(tree.GetRootNode().lock());
 
 	assert(v.size() == 7);
 	assert(v[0] == 4);
