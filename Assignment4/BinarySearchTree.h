@@ -18,7 +18,7 @@ namespace assignment4
 		const std::weak_ptr<TreeNode<T>> GetRootNode() const;
 
 		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
-		static void InOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node);
+		static void AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node);
 
 	private:
 		std::shared_ptr<TreeNode<T>> FindSubTree(std::shared_ptr<TreeNode<T>>& node);
@@ -26,7 +26,6 @@ namespace assignment4
 		std::shared_ptr<TreeNode<T>>& SerchDeleteNode(std::shared_ptr<TreeNode<T>>& node, const T& data);
 		void InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::weak_ptr<TreeNode<T>> parent);
 		std::shared_ptr<TreeNode<T>> mRootNode;
-		std::shared_ptr<TreeNode<T>> mDeleteNode;
 		std::shared_ptr<TreeNode<T>> mEmptyNode;
 
 		size_t mSize;
@@ -37,7 +36,6 @@ namespace assignment4
 	inline BinarySearchTree<T>::BinarySearchTree()
 		: mSize(0)
 		, mRootNode(nullptr)
-		, mEmptyNode(nullptr)
 	{
 	}
 
@@ -54,7 +52,7 @@ namespace assignment4
 		{
 			InsertTreeNode(mRootNode->Left, std::move(data), mRootNode);
 		}
-		else if (*data > * mRootNode->Data)
+		else if (*data > *mRootNode->Data)
 		{
 			InsertTreeNode(mRootNode->Right, std::move(data), mRootNode);
 		}
@@ -184,7 +182,7 @@ namespace assignment4
 			else
 			{
 				mRootNode = tmpNode;
-				mRootNode->Parent = mEmptyNode;
+				mRootNode->Parent.lock() = nullptr;
 			}
 		}
 		return true;
@@ -194,18 +192,18 @@ namespace assignment4
 	std::vector<T> BinarySearchTree<T>::TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode)
 	{
 		std::vector<T> v;
-		InOrder(v, startNode);
+		AddInOrder(v, startNode);
 		return v;
 	}
 
 	template<typename T>
-	inline void BinarySearchTree<T>::InOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node)
+	inline void BinarySearchTree<T>::AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node)
 	{
 		if (node != nullptr)
 		{
-			InOrder(v, node->Left);
+			AddInOrder(v, node->Left);
 			v.push_back(*node->Data);
-			InOrder(v, node->Right);
+			AddInOrder(v, node->Right);
 		}
 	}
 
@@ -231,7 +229,7 @@ namespace assignment4
 		{
 			return SearchTreeNode(node->Left, data);
 		}
-		else if (data > * node->Data)
+		else if (data > *node->Data)
 		{
 			return SearchTreeNode(node->Right, data);
 		}
@@ -279,7 +277,7 @@ namespace assignment4
 		{
 			return SerchDeleteNode(node->Left, data);
 		}
-		else if (data > * node->Data)
+		else if (data > *node->Data)
 		{
 			return SerchDeleteNode(node->Right, data);
 		}
@@ -303,7 +301,7 @@ namespace assignment4
 		{
 			InsertTreeNode(node->Left, std::move(data), node);
 		}
-		else if (*data > * node->Data)
+		else if (*data > *node->Data)
 		{
 			InsertTreeNode(node->Right, std::move(data), node);
 		}
