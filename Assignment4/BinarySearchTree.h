@@ -16,18 +16,15 @@ namespace assignment4
 		bool Search(const T& data);
 		bool Delete(const T& data);
 		const std::weak_ptr<TreeNode<T>> GetRootNode() const;
-
-		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
-		static void AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node);
-
-	private:
 		std::shared_ptr<TreeNode<T>> FindSubTree(std::shared_ptr<TreeNode<T>>& node);
 		bool SearchTreeNode(std::shared_ptr<TreeNode<T>>& node, const T& data);
 		std::shared_ptr<TreeNode<T>>& SerchDeleteNode(std::shared_ptr<TreeNode<T>>& node, const T& data);
+		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
+		static void AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node);
 		void InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::weak_ptr<TreeNode<T>> parent);
-		std::shared_ptr<TreeNode<T>> mRootNode;
-		std::shared_ptr<TreeNode<T>> mEmptyNode;
 
+	private:
+		std::shared_ptr<TreeNode<T>> mRootNode;
 		size_t mSize;
 	};
 
@@ -36,7 +33,6 @@ namespace assignment4
 	inline BinarySearchTree<T>::BinarySearchTree()
 		: mSize(0)
 		, mRootNode(nullptr)
-		, mEmptyNode(nullptr)
 	{
 	}
 
@@ -150,7 +146,6 @@ namespace assignment4
 					{
 						tmpNode->Right->Parent = tmpNode->Parent;
 					}
-
 				}
 				else
 				{
@@ -218,7 +213,7 @@ namespace assignment4
 		{
 			AddInOrder(v, node->Left);
 			v.push_back(*node->Data);
-			std::cout << *node->Data << std::endl;
+			//std::cout << *node->Data << std::endl;
 			AddInOrder(v, node->Right);
 		}
 	}
