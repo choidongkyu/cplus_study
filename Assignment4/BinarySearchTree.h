@@ -139,7 +139,7 @@ namespace assignment4
 		{
 			if (tmpNode->Parent.lock() != deleteNode)
 			{
-				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
+				/*if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
 				{
 					tmpNode->Parent.lock()->Left = tmpNode->Right;
 					if (tmpNode->Right != nullptr)
@@ -154,6 +154,14 @@ namespace assignment4
 					{
 						tmpNode->Right->Parent = tmpNode->Parent;
 					}
+				}*/
+				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
+				{
+					tmpNode->Parent.lock()->Left = nullptr;
+				}
+				else
+				{
+					tmpNode->Parent.lock()->Right = nullptr;
 				}
 			}
 			
