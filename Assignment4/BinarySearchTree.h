@@ -36,6 +36,7 @@ namespace assignment4
 	inline BinarySearchTree<T>::BinarySearchTree()
 		: mSize(0)
 		, mRootNode(nullptr)
+		, mEmptyNode(nullptr)
 	{
 	}
 
@@ -140,14 +141,27 @@ namespace assignment4
 		}
 		else
 		{
-			if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
+			if (tmpNode->Parent.lock() != deleteNode)
 			{
-				tmpNode->Parent.lock()->Left = nullptr;
+				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
+				{
+					tmpNode->Parent.lock()->Left = tmpNode->Right;
+					if (tmpNode->Right != nullptr)
+					{
+						tmpNode->Right->Parent = tmpNode->Parent;
+					}
+
+				}
+				else
+				{
+					tmpNode->Parent.lock()->Right = tmpNode->Right;
+					if (tmpNode->Right != nullptr)
+					{
+						tmpNode->Right->Parent = tmpNode->Parent;
+					}
+				}
 			}
-			else
-			{
-				tmpNode->Parent.lock()->Right = nullptr;
-			}
+			
 
 			if (deleteNode->Left != nullptr)
 			{
@@ -185,6 +199,7 @@ namespace assignment4
 				mRootNode->Parent.lock() = nullptr;
 			}
 		}
+		--mSize;
 		return true;
 	}
 
@@ -203,6 +218,7 @@ namespace assignment4
 		{
 			AddInOrder(v, node->Left);
 			v.push_back(*node->Data);
+			std::cout << *node->Data << std::endl;
 			AddInOrder(v, node->Right);
 		}
 	}
