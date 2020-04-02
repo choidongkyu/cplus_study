@@ -93,9 +93,13 @@ namespace assignment4
 		{
 			tmpNode = FindSubTree(deleteNode->Right);
 		}
-		else
+		else if (deleteNode == mRootNode)
 		{
 			tmpNode = FindSubTree(deleteNode);
+		}
+		else
+		{
+			tmpNode = deleteNode;
 		}
 
 		std::cout << "FindSubTree = " << *tmpNode->Data << std::endl;
@@ -104,51 +108,35 @@ namespace assignment4
 		{
 			if (deleteNode->Parent.lock() != nullptr)
 			{
-				if (deleteNode->Left != nullptr)
+				if (deleteNode->Left == nullptr && deleteNode->Right == nullptr)
 				{
-					deleteNode->Left->Parent = deleteNode->Parent;
-					deleteNode->Parent.lock()->Left = deleteNode->Left;
+					if (*deleteNode->Data > *deleteNode->Parent.lock()->Data)
+					{
+						deleteNode->Parent.lock()->Right = nullptr;
+					}
+					else
+					{
+						deleteNode->Parent.lock()->Left = nullptr;
+					}
+				}
+				else if (deleteNode->Left != nullptr)
+				{
+					if (*deleteNode->Data < * deleteNode->Parent.lock()->Data)
+					{
+						deleteNode->Parent.lock()->Left = deleteNode->Left;
+						deleteNode->Left->Parent = deleteNode->Parent;
+					}
+					else
+					{
+						deleteNode->Parent.lock()->Right = deleteNode->Left;
+						deleteNode->Left->Parent = deleteNode->Parent;
+					}
+					
 				}
 				else
 				{
-					if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
-					{
-						deleteNode->Parent.lock()->Left = nullptr;
-					}
-					else
-					{
-						deleteNode->Parent.lock()->Right = nullptr;
-					}
+					deleteNode->Parent.lock()->Left = nullptr;
 				}
-
-				if (deleteNode->Right != nullptr)
-				{
-					deleteNode->Right->Parent = deleteNode->Parent;
-					deleteNode->Parent.lock()->Right = deleteNode->Right;
-				}
-				else
-				{
-					if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
-					{
-						deleteNode->Parent.lock()->Left = nullptr;
-					}
-					else
-					{
-						deleteNode->Parent.lock()->Right = nullptr;
-					}
-				}
-
-				/*if (deleteNode->Right == nullptr && deleteNode->Left == nullptr)
-				{
-					if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
-					{
-						deleteNode->Parent.lock()->Left = nullptr;
-					}
-					else
-					{
-						deleteNode->Parent.lock()->Right = nullptr;
-					}
-				}*/
 			}
 			else
 			{
