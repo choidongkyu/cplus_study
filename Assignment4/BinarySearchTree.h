@@ -161,8 +161,8 @@ namespace assignment4
 			{
 				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
 				{
-					tmpNode->Parent.lock()->Left = nullptr;
-					/*if (tmpNode->Right != nullptr)
+					//tmpNode->Parent.lock()->Left = nullptr;
+					if (tmpNode->Right != nullptr)
 					{
 						tmpNode->Parent.lock()->Left = tmpNode->Right;
 						tmpNode->Right->Parent = tmpNode->Parent;
@@ -170,13 +170,13 @@ namespace assignment4
 					else 
 					{
 						tmpNode->Parent.lock()->Left = nullptr;
-					}*/
+					}
 					
 				}
 				else
 				{
-					tmpNode->Parent.lock()->Right = nullptr;
-					/*if (tmpNode->Right != nullptr)
+					//tmpNode->Parent.lock()->Right = nullptr;
+					if (tmpNode->Right != nullptr)
 					{
 						tmpNode->Parent.lock()->Right = tmpNode->Right;
 						tmpNode->Right->Parent = tmpNode->Parent;
@@ -184,7 +184,7 @@ namespace assignment4
 					else
 					{
 						tmpNode->Parent.lock()->Right = nullptr;
-					}*/
+					}
 				}
 			}
 
