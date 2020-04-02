@@ -157,11 +157,11 @@ namespace assignment4
 				}*/
 				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
 				{
-					tmpNode->Parent.lock()->Left = nullptr;
+					tmpNode->Parent.lock()->Left = tmpNode->Right;
 				}
 				else
 				{
-					tmpNode->Parent.lock()->Right = nullptr;
+					tmpNode->Parent.lock()->Right = tmpNode->Right;
 				}
 			}
 			
