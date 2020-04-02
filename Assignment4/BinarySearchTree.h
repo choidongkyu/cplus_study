@@ -109,13 +109,7 @@ namespace assignment4
 					deleteNode->Left->Parent = deleteNode->Parent;
 					deleteNode->Parent.lock()->Left = deleteNode->Left;
 				}
-				if (deleteNode->Right != nullptr)
-				{
-					deleteNode->Right->Parent = deleteNode->Parent;
-					deleteNode->Parent.lock()->Right = deleteNode->Right;
-				}
-
-				if (deleteNode->Right == nullptr && deleteNode->Left == nullptr)
+				else
 				{
 					if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
 					{
@@ -126,6 +120,35 @@ namespace assignment4
 						deleteNode->Parent.lock()->Right = nullptr;
 					}
 				}
+
+				if (deleteNode->Right != nullptr)
+				{
+					deleteNode->Right->Parent = deleteNode->Parent;
+					deleteNode->Parent.lock()->Right = deleteNode->Right;
+				}
+				else
+				{
+					if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
+					{
+						deleteNode->Parent.lock()->Left = nullptr;
+					}
+					else
+					{
+						deleteNode->Parent.lock()->Right = nullptr;
+					}
+				}
+
+				/*if (deleteNode->Right == nullptr && deleteNode->Left == nullptr)
+				{
+					if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
+					{
+						deleteNode->Parent.lock()->Left = nullptr;
+					}
+					else
+					{
+						deleteNode->Parent.lock()->Right = nullptr;
+					}
+				}*/
 			}
 			else
 			{
