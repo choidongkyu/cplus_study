@@ -25,24 +25,21 @@ namespace assignment4
 
 	private:
 		std::shared_ptr<TreeNode<T>> mRootNode;
-		size_t mSize;
 	};
 
 
 	template<typename T>
 	inline BinarySearchTree<T>::BinarySearchTree()
-		: mSize(0)
-		, mRootNode(nullptr)
+		: mRootNode(nullptr)
 	{
 	}
 
 	template<typename T>
 	void BinarySearchTree<T>::Insert(std::unique_ptr<T> data)
 	{
-		if (mSize == 0)
+		if (mRootNode == nullptr)
 		{
 			mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
-			++mSize;
 			return;
 		}
 		if (*data < *mRootNode->Data)
@@ -67,7 +64,7 @@ namespace assignment4
 	template<typename T>
 	bool BinarySearchTree<T>::Search(const T& data)
 	{
-		if (mSize == 0)
+		if (mRootNode == nullptr)
 		{
 			return false;
 		}
@@ -80,7 +77,7 @@ namespace assignment4
 		std::shared_ptr<TreeNode<T>> deleteNode;
 		std::shared_ptr<TreeNode<T>> tmpNode;
 
-		if (mSize == 0)
+		if (mRootNode == nullptr)
 		{
 			return false;
 		}
@@ -218,7 +215,6 @@ namespace assignment4
 				mRootNode->Parent.lock() = nullptr;
 			}
 		}
-		--mSize;
 		return true;
 	}
 
@@ -328,7 +324,6 @@ namespace assignment4
 		if (node == nullptr)
 		{
 			node = std::make_shared<TreeNode<T>>(parent.lock(), std::move(data));
-			++mSize;
 			return;
 		}
 
