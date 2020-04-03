@@ -21,7 +21,7 @@ namespace assignment4
 		std::shared_ptr<TreeNode<T>>& SerchDeleteNode(std::shared_ptr<TreeNode<T>>& node, const T& data);
 		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
 		static void AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node);
-		void InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::weak_ptr<TreeNode<T>> parent);
+		void InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>> parent);
 
 	private:
 		std::shared_ptr<TreeNode<T>> mRootNode;
@@ -37,20 +37,7 @@ namespace assignment4
 	template<typename T>
 	void BinarySearchTree<T>::Insert(std::unique_ptr<T> data)
 	{
-		if (mRootNode == nullptr)
-		{
-			mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
-			return;
-		}
-		if (*data < *mRootNode->Data)
-		{
-			InsertTreeNode(mRootNode->Left, std::move(data), mRootNode);
-		}
-		else if (*data > *mRootNode->Data)
-		{
-			InsertTreeNode(mRootNode->Right, std::move(data), mRootNode);
-		}
-
+		InsertTreeNode(mRootNode, std::move(data), nullptr);
 	}
 
 	template<typename T>
@@ -149,8 +136,8 @@ namespace assignment4
 			{
 				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
 				{
-					tmpNode->Parent.lock()->Left = nullptr;
-					/*if (tmpNode->Right != nullptr)
+					//tmpNode->Parent.lock()->Left = nullptr;
+					if (tmpNode->Right != nullptr)
 					{
 						tmpNode->Parent.lock()->Left = tmpNode->Right;
 						tmpNode->Right->Parent = tmpNode->Parent;
@@ -158,13 +145,13 @@ namespace assignment4
 					else 
 					{
 						tmpNode->Parent.lock()->Left = nullptr;
-					}*/
+					}
 					
 				}
 				else
 				{
-					tmpNode->Parent.lock()->Right = nullptr;
-					/*if (tmpNode->Right != nullptr)
+					//tmpNode->Parent.lock()->Right = nullptr;
+					if (tmpNode->Right != nullptr)
 					{
 						tmpNode->Parent.lock()->Right = tmpNode->Right;
 						tmpNode->Right->Parent = tmpNode->Parent;
@@ -172,7 +159,7 @@ namespace assignment4
 					else
 					{
 						tmpNode->Parent.lock()->Right = nullptr;
-					}*/
+					}
 				}
 			}
 
@@ -316,12 +303,20 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline void BinarySearchTree<T>::InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::weak_ptr<TreeNode<T>> parent)
+	inline void BinarySearchTree<T>::InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>> parent)
 	{
 		if (node == nullptr)
 		{
-			node = std::make_shared<TreeNode<T>>(parent.lock(), std::move(data));
-			return;
+			if (parent == nullptr)
+			{
+				mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
+				return;
+			}
+			else
+			{
+				node = std::make_shared<TreeNode<T>>(parent, std::move(data));
+				return;
+			}
 		}
 
 		if (*data < *node->Data)
