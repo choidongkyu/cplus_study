@@ -136,8 +136,8 @@ namespace assignment4
 			{
 				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
 				{
-					tmpNode->Parent.lock()->Left = nullptr;
-					/*if (tmpNode->Right != nullptr)
+					//tmpNode->Parent.lock()->Left = nullptr;
+					if (tmpNode->Right != nullptr)
 					{
 						tmpNode->Parent.lock()->Left = tmpNode->Right;
 						tmpNode->Right->Parent = tmpNode->Parent;
@@ -145,13 +145,13 @@ namespace assignment4
 					else 
 					{
 						tmpNode->Parent.lock()->Left = nullptr;
-					}*/
+					}
 					
 				}
 				else
 				{
-					tmpNode->Parent.lock()->Right = nullptr;
-					/*if (tmpNode->Right != nullptr)
+					//tmpNode->Parent.lock()->Right = nullptr;
+					if (tmpNode->Right != nullptr)
 					{
 						tmpNode->Parent.lock()->Right = tmpNode->Right;
 						tmpNode->Right->Parent = tmpNode->Parent;
@@ -159,7 +159,7 @@ namespace assignment4
 					else
 					{
 						tmpNode->Parent.lock()->Right = nullptr;
-					}*/
+					}
 				}
 			}
 
@@ -250,7 +250,7 @@ namespace assignment4
 		}
 		else
 		{
-			std::cout << "mRootNode = " << *mRootNode->Data << std::endl;
+			std::cout << "searchNode = " << *node->Data << std::endl;
 			if (node->Parent.lock() != nullptr)
 			{
 				std::cout << "parent = " << *node->Parent.lock()->Data << std::endl;
