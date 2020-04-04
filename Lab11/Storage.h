@@ -47,10 +47,6 @@ namespace lab11
 		: mSize(other.mSize)
 	{
 		mArray = std::make_unique<T[]>(other.mSize);
-		/*for (size_t i = 0; i < mSize; ++i)
-		{
-			mArray[i] = other[i];
-		}*/
 		std::memcpy(mArray.get(), other.mArray.get(), sizeof(T) * mSize);
 	}
 
@@ -71,10 +67,6 @@ namespace lab11
 			mArray = nullptr;
 			mSize = other.mSize;
 			mArray = std::make_unique<T[]>(other.mSize);
-			/*for (size_t i = 0; i < mSize; ++i)
-			{
-				mArray[i] = other.mArray[i];
-			}*/
 			std::memcpy(mArray.get(), other.mArray.get(), sizeof(T) * mSize);
 		}
 		return *this;
