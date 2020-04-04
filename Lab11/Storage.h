@@ -25,7 +25,7 @@ namespace lab11
 
 	template<typename T>
 	Storage<T>::Storage(unsigned int length)
-		:mSize(length)
+		: mSize(length)
 	{
 		mArray = std::make_unique<T[]>(length);
 		std::memset(mArray.get(), 0, length * sizeof(T));
@@ -33,7 +33,7 @@ namespace lab11
 
 	template<typename T>
 	Storage<T>::Storage(unsigned int length, const T& initialValue)
-		:mSize(length)
+		: mSize(length)
 	{
 		mArray = std::make_unique<T[]>(length);
 		for (size_t i = 0; i < length; ++i)
@@ -44,7 +44,7 @@ namespace lab11
 
 	template<typename T>
 	Storage<T>::Storage(const Storage& other)
-		:mSize(other.mSize)
+		: mSize(other.mSize)
 	{
 		mArray = std::make_unique<T[]>(other.mSize);
 		/*for (size_t i = 0; i < mSize; ++i)
