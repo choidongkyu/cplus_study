@@ -28,10 +28,7 @@ namespace lab11
 		:mSize(length)
 	{
 		mArray = std::make_unique<T[]>(length);
-		for (size_t i = 0; i < length; ++i)
-		{
-			mArray[i] = 0;
-		}
+		std::memset(mArray.get(), 0, length * sizeof(T));
 	}
 
 	template<typename T>
@@ -50,10 +47,11 @@ namespace lab11
 		:mSize(other.mSize)
 	{
 		mArray = std::make_unique<T[]>(other.mSize);
-		for (size_t i = 0; i < mSize; ++i)
+		/*for (size_t i = 0; i < mSize; ++i)
 		{
 			mArray[i] = other[i];
-		}
+		}*/
+		std::memcpy(mArray.get(), other.mArray.get(), sizeof(T) * mSize);
 	}
 
 	template<typename T>
@@ -73,10 +71,11 @@ namespace lab11
 			mArray = nullptr;
 			mSize = other.mSize;
 			mArray = std::make_unique<T[]>(other.mSize);
-			for (size_t i = 0; i < mSize; ++i)
+			/*for (size_t i = 0; i < mSize; ++i)
 			{
 				mArray[i] = other.mArray[i];
-			}
+			}*/
+			std::memcpy(mArray.get(), other.mArray.get(), sizeof(T) * mSize);
 		}
 		return *this;
 	}
