@@ -41,7 +41,22 @@ namespace assignment4
 		{
 			return;
 		}
-		InsertTreeNode(mRootNode, std::move(data), nullptr);
+
+		if (mRootNode == nullptr)
+		{
+			mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
+			return;
+		}
+
+		if (*mRootNode->Data > * data)
+		{
+			InsertTreeNode(mRootNode->Left, std::move(data), mRootNode);
+		}
+		else
+		{
+			InsertTreeNode(mRootNode->Right, std::move(data), mRootNode);
+		}
+		
 	}
 
 	template<typename T>
@@ -263,29 +278,18 @@ namespace assignment4
 	{
 		if (node == nullptr)
 		{
-			if (parent == nullptr)
-			{
-				mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
-				return;
-			}
-			else
-			{
-				node = std::make_shared<TreeNode<T>>(parent, std::move(data));
-				return;
-			}
+			node = std::make_shared<TreeNode<T>>(parent, std::move(data));
+			return;
 		}
 
-		if (*data < *node->Data)
+		if (*node->Data > *data)
 		{
 			InsertTreeNode(node->Left, std::move(data), node);
 		}
-		else if (*data > * node->Data)
+		else
 		{
 			InsertTreeNode(node->Right, std::move(data), node);
 		}
-		else
-		{
-			return;
-		}
+
 	}
 }
