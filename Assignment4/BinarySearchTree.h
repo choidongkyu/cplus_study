@@ -48,13 +48,13 @@ namespace assignment4
 			return;
 		}
 
-		if (*mRootNode->Data > * data)
+		if (*mRootNode->Data < *data)
 		{
-			InsertTreeNode(mRootNode->Left, std::move(data), mRootNode);
+			InsertTreeNode(mRootNode->Right, std::move(data), mRootNode);
 		}
 		else
 		{
-			InsertTreeNode(mRootNode->Right, std::move(data), mRootNode);
+			InsertTreeNode(mRootNode->Left, std::move(data), mRootNode);
 		}
 		
 	}
