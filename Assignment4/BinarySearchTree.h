@@ -47,14 +47,27 @@ namespace assignment4
 			mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
 			return;
 		}
-
-		if (*mRootNode->Data < *data)
+		std::shared_ptr<TreeNode<T>> curr = mRootNode;
+		std::shared_ptr<TreeNode<T>> parent = nullptr;
+		while (curr != nullptr)
 		{
-			InsertTreeNode(mRootNode->Right, std::move(data), mRootNode);
+			parent = curr;
+			if (*data < *parent->Data)
+			{
+				curr = curr->Left;
+			}
+			else
+			{
+				curr = curr->Right;
+			}
+		}
+		if (*data < *parent->Data)
+		{
+			parent->Left = std::make_shared<TreeNode<T>>(parent,std::move(data));
 		}
 		else
 		{
-			InsertTreeNode(mRootNode->Left, std::move(data), mRootNode);
+			parent->Right = std::make_shared<TreeNode<T>>(parent, std::move(data));
 		}
 		
 	}
@@ -182,7 +195,7 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline void BinarySearchTree<T>::AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node)
+	void BinarySearchTree<T>::AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node)
 	{
 		if (node != nullptr)
 		{
@@ -194,7 +207,7 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline std::shared_ptr<TreeNode<T>> BinarySearchTree<T>::FindSubTree(std::shared_ptr<TreeNode<T>>& node)
+	std::shared_ptr<TreeNode<T>> BinarySearchTree<T>::FindSubTree(std::shared_ptr<TreeNode<T>>& node)
 	{
 		if (node->Left != nullptr)
 		{
@@ -204,7 +217,7 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline bool BinarySearchTree<T>::SearchTreeNode(std::shared_ptr<TreeNode<T>>& node, const T& data)
+	bool BinarySearchTree<T>::SearchTreeNode(std::shared_ptr<TreeNode<T>>& node, const T& data)
 	{
 		if (node == nullptr)
 		{
@@ -252,7 +265,7 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline std::shared_ptr<TreeNode<T>>& BinarySearchTree<T>::SerchDeleteNode(std::shared_ptr<TreeNode<T>>& node, const T& data)
+	std::shared_ptr<TreeNode<T>>& BinarySearchTree<T>::SerchDeleteNode(std::shared_ptr<TreeNode<T>>& node, const T& data)
 	{
 		if (node == nullptr)
 		{
@@ -274,7 +287,7 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline void BinarySearchTree<T>::InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>>& parent)
+	void BinarySearchTree<T>::InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>>& parent)
 	{
 		if (node == nullptr)
 		{
