@@ -37,6 +37,10 @@ namespace assignment4
 	template<typename T>
 	void BinarySearchTree<T>::Insert(std::unique_ptr<T> data)
 	{
+		if (Search(*data))
+		{
+			return;
+		}
 		InsertTreeNode(mRootNode, std::move(data), nullptr);
 	}
 
