@@ -63,6 +63,7 @@ namespace assignment4
 	{
 		std::shared_ptr<TreeNode<T>> deleteNode;
 		std::shared_ptr<TreeNode<T>> tmpNode;
+		std::shared_ptr<TreeNode<T>> childNode;
 
 		if (mRootNode == nullptr)
 		{
@@ -76,127 +77,78 @@ namespace assignment4
 		}
 
 		std::cout << "delete node = " << *deleteNode->Data << std::endl;
-		if (deleteNode->Right != nullptr)
-		{
-			tmpNode = FindSubTree(deleteNode->Right);
-		}
-		else if (deleteNode == mRootNode)
-		{
-			tmpNode = FindSubTree(deleteNode);
-		}
-		else
-		{
-			tmpNode = deleteNode;
-		}
 
-		std::cout << "FindSubTree = " << *tmpNode->Data << std::endl;
-
-		if (deleteNode == tmpNode)
+		//delete node가 단말인 경우
+		if (deleteNode->Left == nullptr && deleteNode->Right == nullptr)
 		{
 			if (deleteNode->Parent.lock() != nullptr)
 			{
-				if (deleteNode->Left == nullptr && deleteNode->Right == nullptr)
+				if (deleteNode->Parent.lock()->Left == deleteNode)
 				{
-					if (*deleteNode->Data > *deleteNode->Parent.lock()->Data)
-					{
-						deleteNode->Parent.lock()->Right = nullptr;
-					}
-					else
-					{
-						deleteNode->Parent.lock()->Left = nullptr;
-					}
-				}
-				else if (deleteNode->Left != nullptr)
-				{
-					if (*deleteNode->Data < * deleteNode->Parent.lock()->Data)
-					{
-						deleteNode->Parent.lock()->Left = deleteNode->Left;
-						deleteNode->Left->Parent = deleteNode->Parent;
-					}
-					else
-					{
-						deleteNode->Parent.lock()->Right = deleteNode->Left;
-						deleteNode->Left->Parent = deleteNode->Parent;
-					}
-					
+					deleteNode->Parent.lock()->Left = nullptr;
 				}
 				else
 				{
-					deleteNode->Parent.lock()->Left = nullptr;
+					deleteNode->Parent.lock()->Right = nullptr;
 				}
 			}
 			else
 			{
-				mRootNode = nullptr;
+				mRootNode = nullptr;//부모가 없다면 rootnode이다.
 			}
 		}
-		else
+		//delete node에 자식노드가 하나인 경우
+		else if (deleteNode->Left == nullptr || deleteNode->Right == nullptr)
 		{
-			if (tmpNode->Parent.lock() != deleteNode)
-			{
-				if (*tmpNode->Data < *tmpNode->Parent.lock()->Data)
-				{
-					//tmpNode->Parent.lock()->Left = nullptr;
-					if (tmpNode->Right != nullptr)
-					{
-						tmpNode->Parent.lock()->Left = tmpNode->Right;
-						tmpNode->Right->Parent = tmpNode->Parent;
-					}
-					else 
-					{
-						tmpNode->Parent.lock()->Left = nullptr;
-					}
-					
-				}
-				else
-				{
-					//tmpNode->Parent.lock()->Right = nullptr;
-					if (tmpNode->Right != nullptr)
-					{
-						tmpNode->Parent.lock()->Right = tmpNode->Right;
-						tmpNode->Right->Parent = tmpNode->Parent;
-					}
-					else
-					{
-						tmpNode->Parent.lock()->Right = nullptr;
-					}
-				}
-			}
-
-			if (deleteNode->Left != nullptr)
-			{
-				if (deleteNode->Left != tmpNode)
-				{
-					deleteNode->Left->Parent = tmpNode;
-					tmpNode->Left = deleteNode->Left;
-				}
-			}
-			if (deleteNode->Right != nullptr)
-			{
-				if (deleteNode->Right != tmpNode)
-				{
-					deleteNode->Right->Parent = tmpNode;
-					tmpNode->Right = deleteNode->Right;
-				}
-			}
-
+			tmpNode = (deleteNode->Left != nullptr) ? deleteNode->Left : deleteNode->Right;
 			if (deleteNode->Parent.lock() != nullptr)
 			{
-				tmpNode->Parent = deleteNode->Parent;
-
-				if (*deleteNode->Data < *deleteNode->Parent.lock()->Data)
+				if (deleteNode->Parent.lock()->Left == deleteNode)
 				{
 					deleteNode->Parent.lock()->Left = tmpNode;
+					tmpNode->Parent = deleteNode->Parent;
 				}
 				else
 				{
 					deleteNode->Parent.lock()->Right = tmpNode;
+					tmpNode->Parent = deleteNode->Parent;
 				}
 			}
 			else
 			{
 				mRootNode = tmpNode;
-				mRootNode->Parent.lock() = nullptr;
+			}
+		}
+		//두개의 자식노드를 가지는 경우
+		else
+		{
+			tmpNode = FindSubTree(deleteNode->Right);
+			deleteNode->Data = nullptr;//기존 deleteNode의 유니크포인터 값을 초기화
+			deleteNode->Data = std::move(tmpNode->Data);//deleteNode의 값을 tmpnode의 값으로 바꿈
+			if (tmpNode->Left == nullptr && tmpNode->Right == nullptr)//tmpnode를 지우는데 tmpnode가 단말인경우
+			{
+				if (tmpNode->Parent.lock()->Left == tmpNode)
+				{
+					tmpNode->Parent.lock()->Left = nullptr;
+				}
+				else
+				{
+					tmpNode->Parent.lock()->Right = nullptr;
+				}
+			}
+			else if (tmpNode->Left == nullptr || tmpNode->Right == nullptr)//tmpnode를 지우는데 하나의 자식노드를 가지는경우
+			{
+				childNode = (tmpNode->Left != nullptr) ? tmpNode->Left : tmpNode->Right;
+				if (tmpNode->Parent.lock()->Left == tmpNode)
+				{
+					tmpNode->Parent.lock()->Left = childNode;
+					childNode->Parent = tmpNode->Parent;
+				}
+				else
+				{
+					tmpNode->Parent.lock()->Right = childNode;
+					childNode->Parent = tmpNode->Parent;
+				}
 			}
 		}
 		return true;
@@ -244,7 +196,7 @@ namespace assignment4
 		{
 			return SearchTreeNode(node->Left, data);
 		}
-		else if (data > *node->Data)
+		else if (data > * node->Data)
 		{
 			return SearchTreeNode(node->Right, data);
 		}
@@ -292,7 +244,7 @@ namespace assignment4
 		{
 			return SerchDeleteNode(node->Left, data);
 		}
-		else if (data > *node->Data)
+		else if (data > * node->Data)
 		{
 			return SerchDeleteNode(node->Right, data);
 		}
@@ -323,7 +275,7 @@ namespace assignment4
 		{
 			InsertTreeNode(node->Left, std::move(data), node);
 		}
-		else if (*data > *node->Data)
+		else if (*data > * node->Data)
 		{
 			InsertTreeNode(node->Right, std::move(data), node);
 		}
