@@ -44,7 +44,7 @@ namespace assignment4
 
 		if (mRootNode == nullptr)
 		{
-			mRootNode.reset(new TreeNode(std::move(data)));
+			mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
 			return;
 		}
 		std::shared_ptr<TreeNode<T>> curr = mRootNode;
@@ -63,13 +63,13 @@ namespace assignment4
 		}
 		if (*data < *parent->Data)
 		{
-			parent->Left.reset(new TreeNode(parent, std::move(data)));
+			parent->Left = std::make_shared<TreeNode<T>>(parent, std::move(data));
 		}
 		else
 		{
-			parent->Right.reset(new TreeNode(parent, std::move(data)));
+			parent->Right = std::make_shared<TreeNode<T>>(parent, std::move(data));
 		}
-
+		
 	}
 
 	template<typename T>
