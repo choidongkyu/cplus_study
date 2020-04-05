@@ -37,14 +37,15 @@ namespace assignment4
 	template<typename T>
 	void BinarySearchTree<T>::Insert(std::unique_ptr<T> data)
 	{
-		if (Search(*data))
-		{
-			return;
-		}
-
 		if (mRootNode == nullptr)
 		{
 			mRootNode = std::make_shared<TreeNode<T>>(std::move(data));
+			return;
+		}
+		if (*mRootNode->Data == *data)
+		{
+			mRootNode->Data = nullptr;
+			mRootNode->Data = std::move(data);
 			return;
 		}
 		std::shared_ptr<TreeNode<T>> curr = mRootNode;
