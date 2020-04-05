@@ -21,7 +21,7 @@ namespace assignment4
 		std::shared_ptr<TreeNode<T>>& SerchDeleteNode(std::shared_ptr<TreeNode<T>>& node, const T& data);
 		static std::vector<T> TraverseInOrder(const std::shared_ptr<TreeNode<T>> startNode);
 		static void AddInOrder(std::vector<T>& v, std::shared_ptr<TreeNode<T>> node);
-		void InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>> parent);
+		void InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>>& parent);
 
 	private:
 		std::shared_ptr<TreeNode<T>> mRootNode;
@@ -274,7 +274,7 @@ namespace assignment4
 	}
 
 	template<typename T>
-	inline void BinarySearchTree<T>::InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>> parent)
+	inline void BinarySearchTree<T>::InsertTreeNode(std::shared_ptr<TreeNode<T>>& node, std::unique_ptr<T>(data), std::shared_ptr<TreeNode<T>>& parent)
 	{
 		if (node == nullptr)
 		{
@@ -282,13 +282,13 @@ namespace assignment4
 			return;
 		}
 
-		if (*node->Data > *data)
+		if (*node->Data < *data)
 		{
-			InsertTreeNode(node->Left, std::move(data), node);
+			InsertTreeNode(node->Right, std::move(data), node);
 		}
 		else
 		{
-			InsertTreeNode(node->Right, std::move(data), node);
+			InsertTreeNode(node->Left, std::move(data), node);
 		}
 
 	}
