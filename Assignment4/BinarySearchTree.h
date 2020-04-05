@@ -52,6 +52,7 @@ namespace assignment4
 		{
 			return;
 		}
+
 		std::shared_ptr<TreeNode<T>> curr = mRootNode;
 		std::shared_ptr<TreeNode<T>> parent = nullptr;
 		while (curr != nullptr)
@@ -74,7 +75,7 @@ namespace assignment4
 		{
 			parent->Right = std::make_shared<TreeNode<T>>(parent, std::move(data));
 		}
-		
+
 	}
 
 	template<typename T>
