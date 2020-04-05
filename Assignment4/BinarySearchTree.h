@@ -48,6 +48,10 @@ namespace assignment4
 			mRootNode->Data = std::move(data);
 			return;
 		}
+		if (Search(*data))
+		{
+			return;
+		}
 		std::shared_ptr<TreeNode<T>> curr = mRootNode;
 		std::shared_ptr<TreeNode<T>> parent = nullptr;
 		while (curr != nullptr)

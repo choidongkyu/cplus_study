@@ -8,24 +8,9 @@ int main()
 {
 	assignment4::BinarySearchTree<float> tree;
 	std::vector<float> v1;
-	//빈트리에 대한 테스트
-	assert(tree.GetRootNode().lock() == nullptr);
-	assert(tree.Delete(1.f) == false);
-	assert(tree.Search(1.f) == false);
-
-	//루트 노드 하나만 있을 때 테스트
-	tree.Insert(std::make_unique<float>(1.2f));
-	assert(*tree.GetRootNode().lock()->Data == 1.2f);
-	assert(tree.Search(1.2f) == true);
-
-	v1 = tree.TraverseInOrder(tree.GetRootNode().lock());
-	assert(v1.size() == 1);
-	assert(v1[0] = 1.2f);
-	assert(tree.Delete(1.3f) == false);
-	assert(tree.Delete(1.2f) == true);
-	assert(tree.GetRootNode().lock() == nullptr);
 
 	//그냥 여러 테스트...
+	tree.Insert(std::make_unique<float>(50.f));
 	tree.Insert(std::make_unique<float>(50.f));
 	tree.Insert(std::make_unique<float>(25.f));
 	tree.Insert(std::make_unique<float>(75.f));

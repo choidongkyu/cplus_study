@@ -24,7 +24,6 @@ namespace assignment4
 		, Right(nullptr)
 		, Left(nullptr)
 	{
-//		std::cout << "create TreeNode : " << *Data << std::endl;
 	}
 
 	template<typename T>
@@ -34,12 +33,10 @@ namespace assignment4
 		, Left(nullptr)
 		, Right(nullptr)
 	{
-//		std::cout << "create TreeNode : " << *Data << std::endl;
 	}
 	
 	template<typename T>
 	inline TreeNode<T>::~TreeNode()
 	{
-//		std::cout << "delete TreeNode : " << *Data << std::endl;
 	}
 }
